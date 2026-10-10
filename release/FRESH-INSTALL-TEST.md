@@ -1,20 +1,18 @@
-# Fresh-install test for the separated launcher
+# Fresh-install validation
 
-Candidate: 0.5.0.0, private testing only. Do not begin by deleting saves or resetting Developer Mode. Keep a verified save backup and the working 0.4.0.1 installer.
+Candidate: 0.6.0.1. Use a disposable test import and preserve existing saves and working installers. Do not reset Developer Mode or delete a working game merely to run this checklist.
 
-## Required setup
+The compatible runtime and its preparation support must already be installed. They are excluded from this source repository.
 
-The launcher does not install the native game runtime. The matching runtime must already be installed, with its private `PreparationSupport` folder beside `runtime-bootstrap.json`. A launcher-only ZIP is not a complete from-zero runtime installation. The public repository intentionally excludes that support payload and its patch data.
+Record a result for each step:
 
-On October 10, 2026, launcher 0.5.0.0 was installed on the owner's Xbox, with all 59 separate preparation-support files verified by SHA-256. The existing prepared-game receipt was unchanged. A fresh import/prepare/play cycle with this version has not yet been confirmed.
+1. Open the launcher without a prepared game; Play must remain unavailable.
+2. Import supported files through USB and verify all included supported voice packs.
+3. Exercise Wi-Fi folder transfer separately; check pairing, interruption, and retry.
+4. Approve Steam sign-in, check pinned-version validation, interrupt a partial download, sign in again, and finish verification.
+5. Prepare the imported game; verify readiness and Play only after all work succeeds.
+6. Launch the separate runtime and check its menu and gameplay.
+7. Reopen the launcher and confirm it recognizes the prepared game without unnecessary regeneration.
+8. Test missing preparation support and cancellation with disposable data.
 
-## Record the result of each step
-
-1. Open the launcher with no prepared game. Confirm it offers import and does not say Play is ready.
-2. Import the supported owned game folder through USB. Confirm the language pack is detected and the full copy verifies. Wi-Fi folder import and Steam download require their own follow-up tests; one USB pass does not validate all three routes.
-3. Choose Prepare. Record the final message. Preparation must finish without another game download and enable Play only after verification.
-4. Launch the game, reach its menu, and load gameplay. Check characters, roads, controller input, and an ordinary cutscene.
-5. Close and reopen the launcher. Confirm it still recognizes the prepared game and does not regenerate assets unnecessarily.
-6. Only with a disposable import, test cancellation during preparation and resume. Do not force-delete files or interrupt the brief final commit.
-
-If preparation fails, preserve the import and report the complete message. Do not recopy or reset the console until the failure is inspected. A test pass changes the functional-validation status only; it does not settle the recorded license or runtime-distribution questions.
+Earlier preparation passes and a report that Steam works are useful evidence, but do not complete this whole sequence. Record exact candidate/version and results without account details, tokens, or game content.

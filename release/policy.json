@@ -7,7 +7,7 @@
     },
     "matching_corresponding_source_bundle": {
       "complete": false,
-      "evidence": "Private review bundle includes committed launcher/converter sources and seven hashed upstream source archives. Full legal scope including framework treatment and the final combined license remains unresolved; see REBUILD-FROM-SOURCE.md."
+      "evidence": "The direct-SteamKit review bundle includes launcher/converter sources and six pinned upstream archives. Exact matching distribution scope and framework treatment remain under review; see REBUILD-FROM-SOURCE.md."
     },
     "framework_redistribution": {
       "complete": false,
@@ -15,15 +15,15 @@
     },
     "fresh_install_user_test": {
       "complete": false,
-      "evidence": "User volunteered a fresh test; no result for 0.5.0.0 yet."
+      "evidence": "A complete fresh import/download, interruption/resume, preparation, and play cycle remains unverified for the current candidate."
     },
     "separate_runtime_distribution": {
       "complete": false,
-      "evidence": "Runtime support is outside the launcher. Owner cannot identify original supplier; saved-folder search did not establish a covering license. Detailed component categories are in REDISTRIBUTION-REVIEW.md."
+      "evidence": "Runtime support is excluded. Its original provenance and covering redistribution rights have not been established; see REDISTRIBUTION-REVIEW.md."
     },
     "direct_steamkit_account_download": {
       "complete": false,
-      "evidence": "New independent downloader builds and passes local transfer tests; account-approved download and Xbox validation pending."
+      "evidence": "Local transfer tests passed and the owner reports Steam works on Xbox in 0.6.0.0. Full authenticated download, interruption/resume, and prepare/play validation remains pending."
     }
   }
 }

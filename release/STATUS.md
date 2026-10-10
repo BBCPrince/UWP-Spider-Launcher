@@ -1,42 +1,32 @@
-> Historical 0.5 review below. The 0.6 direct-SteamKit candidate removes DepotDownloader; see [current migration](STEAMKIT-MIGRATION.md). Other release requirements remain open.
+# Project status
 
-# Release status — October 9, 2026
+**0.6.0.1 — experimental source preview. No public installer.**
 
-**Private test candidate; public binary release is not ready.** The repository remains private. A successful game launch is evidence of functionality, not permission to distribute every dependency.
+## Implemented and checked
 
-## Completed
+- USB folder/ZIP import and local Wi-Fi folder transfer.
+- Independent SteamKit downloader with QR approval, pinned manifests, bounded download workers, chunk verification/resume, and final SHA-256 verification.
+- On-console asset preparation from an owned import, exercised in earlier launcher builds.
+- Separate runtime/preparation support; no game or compatibility-runtime payload in the launcher package.
+- Visual Studio Release x64 / .NET Native build and package-content checks for 0.6.0.1.
+- Local transfer, cancellation, corruption, storage, and path-validation tests.
+- The owner reports that Steam works on the Xbox with 0.6.0.0. This is not a documented full interruption/resume and prepare/play cycle.
+- 0.6.0.1 updates the visible name to UWP Spider Launcher. It has been built, but not deployed as part of the branding/documentation update.
 
-- The 0.4.0.1 launcher generated the modified assets from an owned import on Xbox, completed preparation, and the user confirmed the game launches.
-- The 0.5.0.0 candidate moves compatibility binaries, game-module patch data, and runtime-specific seed files out of the launcher into the separately installed runtime's `PreparationSupport` directory. Both JSON control files are pinned by SHA-256. Existing prepared-game receipts remain recognized.
-- The launcher MSIX no longer contains `PreparationPayload`, `ModulePatch.json`, `PreparationRecipe.json`, game archives, or game indexes. Package inspection uses an allowlist and checks required notices; the old 0.4.0.1 package fails that audit as intended.
-- License notices are included. Native helper and asset conversion source, pinned dependencies, synthetic tests, and private-build instructions are available in this repository.
-- Generated geometric app icons have a source script; no game artwork or font file is bundled by that script.
-- October 10: launcher 0.5.0.0 installed on the owner's Xbox. All 59 separate runtime preparation-support files matched local SHA-256 values, and the existing prepared-game receipt was unchanged. This is deployment verification, not a completed fresh-install test.
-- The package audit has regression tests for private binaries, omitted notices, unsafe names, duplicates, and payload-like recipe data. Passing packaging checks cannot override pending release reviews.
-- October 10: collected seven pinned upstream source archives, prepared a private 38.4 MiB launcher source-review bundle, refreshed the 39-package NuGet inventory, and inventoried all 45 signed MSIX entries plus three framework dependencies. See REDISTRIBUTION-REVIEW.md and REBUILD-FROM-SOURCE.md. The review bundle contains no game or compatibility-runtime payload.
-- Extracted the committed launcher snapshot from that bundle into a new directory and successfully rebuilt it through .NET Native with the normal dependencies. The converter's 33 checks passed during the fresh build. This validates the source/build path; it does not resolve the outstanding distribution permissions.
+## Before a public binary release
 
-## Still blocked
+1. Complete the matching corresponding-source and rebuild distribution for the shipped binaries.
+2. Review framework redistribution and any separately distributed runtime.
+3. Complete the [fresh-install test](FRESH-INSTALL-TEST.md), including download interruption/resume.
+4. Review repository history before changing visibility.
+5. Obtain an explicit publication decision.
 
-1. **DepotDownloader licensing compatibility.** The pinned source supplies GPL version 2 text. No verified later-version grant or linking exception has been found. The combined launcher also includes the GPL-3.0 converter and Apache-2.0 dependencies. Do not change upstream license labels to make this disappear. The options are an applicable permission/clarification from the rightsholders or a reviewed architectural/implementation change. A draft request is saved here; it has not been sent.
-2. **Corresponding source distribution.** The launcher successfully rebuilt through .NET Native using a modified SteamKit 2.5.0 library built from the pinned upstream source. The compiler's input DLL hash matched the rebuilt DLL (`f61775d67d7ceb47abd8541ac199f8aa84c8a3a7666b13889795bdc8f4bb8717`). A complete, matching source/rebuild distribution is still needed; a README link alone is not the completed source-distribution plan.
-3. **Separate runtime rights.** Moving private files out of the launcher does not make a runtime bundle redistributable. Its Windows system DLLs, Steam-related components, supplied compatibility code, and their source/license requirements need independent review. The owner cannot identify the original supplier, and the saved source-folder search did not establish a covering license. No runtime binary/source is uploaded to this repository.
-4. **Fresh installation.** The owner volunteered this test. The new external-support candidate must be tested with the matching separately installed runtime/support files, including missing-support errors and an actual import/prepare/play cycle. Do not count a 0.4.0.1 test as a 0.5.0.0 test.
-5. **Framework terms.** Microsoft UWP terms and third-party notices have been included; the exact distribution's conditions still apply. This is not an assertion that an ordinary Windows system DLL may be copied into a public release.
+The machine-readable requirements remain in `policy.json`. None have been waived by the documentation cleanup. The repository remains private.
 
-## Local validation
+## Package check
 
 ```powershell
-.\tools\build-private.ps1
-python .\tests\test_release_audit.py
 python .\tools\audit_release.py <candidate.msix> --packaging-only
 ```
 
-Without `--packaging-only`, the audit must fail while `release/policy.json` has outstanding reviews. The switch is for private packaging validation and never means public release approval. Do not upload the private runtime-support directory or a test signing private key.
-
-## Primary references checked
-
-- [Pinned DepotDownloader license](https://github.com/SteamRE/DepotDownloader/blob/ec692a8d9eaa9da4d966287e14fbc76d8ebe1081/LICENSE).
-- [GNU license compatibility guidance](https://www.gnu.org/licenses/license-compatibility.en.html) and [Apache's GPL compatibility explanation](https://www.apache.org/licenses/GPL-compatibility.html).
-- [SteamKit's pinned license](https://github.com/SteamRE/SteamKit/blob/0c20a7d2aff9842815bf6b5aec657553e4186dd5/LICENSE).
-- [Microsoft UWP package terms](https://github.com/microsoft/dotnet/blob/master/releases/UWP/LICENSE.TXT) and [Visual Studio's redistribution list](https://learn.microsoft.com/en-us/visualstudio/releases/2022/redistribution).
+Packaging-only validation checks file contents and required notices. It does not approve public distribution. Without this flag the tool also enforces the outstanding release requirements.

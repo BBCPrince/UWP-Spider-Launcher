@@ -1,43 +1,73 @@
+![UWP Spider Launcher](docs/images/banner.svg)
+
 # UWP Spider Launcher
 
-Private release preparation for an Xbox Developer Mode launcher that imports a user's own supported Steam game files through USB, local Wi-Fi, or authenticated Steam download.
+**Bring your own game. Import, prepare, and launch from one place.**
 
-Unofficial, independent project. Not affiliated with or endorsed by Microsoft, Valve, Sony, Marvel, or the game's developers or publishers.
+An unofficial UWP launcher for Xbox Developer Mode, with USB folder import, local Wi-Fi transfer, and Steam downloads through SteamKit.
 
-The 0.6.0.1 branding update changes the app display name, launcher header, Wi-Fi page, and Steam sign-in device name. The existing package identity is retained so it can update the test launcher without creating another installation.
+> **Experimental • 0.6.0.1**
+>
+> Source preview. No public installer is available yet. Playing requires a compatible, separately installed game runtime, which is **not included** in this repository.
 
-## What is included in each download
+[Getting started](docs/GETTING-STARTED.md) · [Build from source](release/REBUILD-FROM-SOURCE.md) · [Project status](release/STATUS.md) · [Licenses & notices](THIRD-PARTY-NOTICES.txt)
 
-The installable UWP package includes the application, preparation recipes, and required license notices. It does not include repository test results, release-audit reports, or release-planning Markdown files.
+## Three ways to bring your files
 
-The source repository and its GitHub-generated source ZIP include tracked documentation such as `RELEASE-AUDIT.md`, `TEST-RESULTS.txt`, and the `release/` review notes. Those remain private while the repository is private; changing the repository to public would expose them and its Git history. A public-source cleanup has not been performed.
+| USB drive | Local Wi-Fi | Steam |
+| --- | --- | --- |
+| Import a supported game folder directly from a connected drive. | Send a folder from a PC browser using the address or QR code and pairing code shown on Xbox. | Approve sign-in in the Steam mobile app and download the supported version you own. |
+| Folder and ZIP imports. | No ZIP required; ZIP transfer is also available. | Progress, file verification, and resumable downloads. |
 
-**No installable release is uploaded yet.** This repository contains launcher source for review, synthetic tests, dependency/license information, and release preparation notes. It excludes game assets, game-engine code, compatibility runtime code/binaries, and game binary-patch data. The working local package is not included.
+## What it does
 
-The intended distribution includes the launcher, accurate dependency notices, and any required corresponding-source materials. Each user supplies their own legitimately owned game content. The game runtime is a separate UWP application.
+- **Prepare on Xbox:** generate the required asset variants from your own supported game files.
+- **Verify your import:** check supported versions and file hashes before marking files ready.
+- **Keep your languages:** USB and Wi-Fi imports copy all included supported voice packs. Steam download currently selects English.
+- **Manage storage:** view available space and remove prepared game files through a confirmation screen.
+- **Launch your game:** open the separately installed runtime once preparation is complete.
 
-## Direct SteamKit candidate (0.6.0.0)
+## Before you start
 
-This branch replaces DepotDownloader with an independently implemented SteamKit
-client. The test package uses `Local.SpiderManLauncherSteamKitTest` so it can be
-installed alongside the working 0.5 launcher. It still shares the game storage
-location: never run two imports/preparations at once. The currently installed
-Xbox launcher and game have not been replaced.
+- An Xbox in Developer Mode. Current console testing is on **Series X**; Series S support is not verified.
+- Your own copy of **Marvel’s Spider-Man Remastered**, matching supported Steam build **14752622**. A newer installation is not automatically compatible.
+- A matching game runtime and its preparation support, installed separately.
+- Enough free storage for the import and generated files. The launcher checks space before proceeding.
 
-QR approval, account-authorized pinned-manifest downloads, bounded workers,
-partial-chunk resume, SHA-256 file verification and credential-free event logs
-are implemented. USB/Wi-Fi import and asset preparation are retained. A live
-account-approved transfer on Xbox is still needed before replacing the working
-launcher. See [migration and tests](release/STEAMKIT-MIGRATION.md).
+**This repository is the launcher and preparation tooling—not a complete game or standalone game port.** It includes no game assets, saves, game executable, or compatibility-runtime binaries/source.
 
-## Current status
+## The workflow
 
-- Repository is private.
-- Initial package audit covered 0.3.5.1; the installed launcher is 0.5.0.0 and this branch tests 0.6.0.0.
-- USB folder import and local Wi-Fi folder transfer are implemented in the local build.
-- Steam download uses Steam mobile QR approval.
-- Release packaging and dependency compliance work remain unfinished.
-- Private candidate 0.5.0.0 removes runtime support and patch data from the launcher package. It reads those files from the separately installed runtime. Build with `tools/build-private.ps1`; review [current release status](release/STATUS.md) before using or distributing it.
-- Asset preparation now runs on Xbox. The [converter](asset-preparation/README.md) recreated all modified assets on PC, passed a 107-asset Xbox sample test, and completed full on-console preparation with local launcher 0.4.0.1. The owner confirmed that installation launches the game. A fresh import/prepare/play test of 0.5.0.0 remains pending. It is not an approved public release.
+**Import or download → Verify → Prepare game → Play**
 
-See [source scope and tests](SOURCE-SCOPE.md), [license review](LICENSE-REVIEW.md), and [the original package audit](RELEASE-AUDIT.md). The default build guard prevents treating a private validation build as an approved public release. Keep the repository private until the owner explicitly requests otherwise.
+For Wi-Fi, open the receiver in the launcher, scan its QR code or enter its address on your PC, pair, and select the game folder. For Steam, scan the sign-in QR code with the Steam mobile app. Never post sign-in QR codes or tokens in an issue.
+
+See the [setup guide](docs/GETTING-STARTED.md) for requirements and limitations.
+
+## Development
+
+The app uses C#/XAML and the UWP .NET Native toolchain. Preparation uses shared C# code and a native texture-conversion helper.
+
+| Folder | Contents |
+| --- | --- |
+| `source/` | Launcher UI, imports, Steam transfer, and preparation orchestration |
+| `asset-preparation/` | Converter source, numeric recipes, and synthetic checks |
+| `tests/` | Automated checks using synthetic files |
+| `tools/` | Build, icon generation, source collection, and package checks |
+| `licenses/` | Third-party license texts |
+| `docs/` | User documentation and original project artwork |
+| `release/` | Build instructions, dependency pins, and release requirements |
+
+[Build instructions](release/REBUILD-FROM-SOURCE.md) · [Source scope](SOURCE-SCOPE.md)
+
+## Status and limitations
+
+USB import and on-console preparation have been exercised in earlier builds. The direct SteamKit candidate has passed local transfer checks, and the owner reports that Steam works on Xbox. A complete fresh download, interruption/resume, preparation, and play-through verification for this candidate is still pending.
+
+Binary distribution remains pending the checks in [project status](release/STATUS.md). Tests passing does not mean every dependency or the separate runtime is cleared for redistribution.
+
+## License and attribution
+
+Component licenses and upstream notices are listed in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt). See [license status](LICENSE-REVIEW.md) for the remaining distribution work.
+
+UWP Spider Launcher is an independent, unofficial project. It is not affiliated with or endorsed by Microsoft, Valve, Sony, Marvel, or the game's developers or publishers. Product names are used to identify compatibility.

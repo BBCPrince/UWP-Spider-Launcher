@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+<title id="title">UWP Spider Launcher</title><desc id="desc">An independent game launcher. USB, Wi-Fi, and Steam imports.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101827"/><stop offset="1" stop-color="#25203b"/></linearGradient></defs>
+<rect width="1200" height="300" rx="14" fill="url(#bg)"/>
+<g fill="none" stroke="#b66687" opacity=".2"><circle cx="1070" cy="125" r="85"/><circle cx="1070" cy="125" r="145"/><circle cx="1070" cy="125" r="210"/><path d="M790 125h410M1070 0v300M850 0l350 215M855 300L1200 32"/></g>
+<rect x="46" y="45" width="47" height="47" rx="11" fill="#ed4266"/><path d="M64 57v23l18-11.5z" fill="white"/>
+<text x="110" y="74" fill="#bdc8d9" font-family="Segoe UI,Arial,sans-serif" font-size="14" letter-spacing="2">INDEPENDENT · UNOFFICIAL · EXPERIMENTAL</text>
+<text x="46" y="158" fill="#fff" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="50">UWP Spider Launcher</text>
+<text x="46" y="200" fill="#c6cede" font-family="Segoe UI,Arial,sans-serif" font-size="20">Your game files. One place to get ready.</text>
+<g font-family="Segoe UI,Arial,sans-serif" font-size="13" fill="#f3dce6"><rect x="46" y="229" width="70" height="29" rx="14" fill="#47304a"/><text x="68" y="249">USB</text><rect x="127" y="229" width="80" height="29" rx="14" fill="#47304a"/><text x="148" y="249">Wi-Fi</text><rect x="218" y="229" width="85" height="29" rx="14" fill="#47304a"/><text x="237" y="249">Steam</text></g>
+</svg>
