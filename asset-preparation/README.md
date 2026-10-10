@@ -18,9 +18,15 @@ The current recipes require original index SHA-256 `58e571cf1e54e08b18db4e8effb3
 
 A separate UWP/.NET Native test app converted 107 private owned-file samples into five archives on Xbox Series X: 100 mip-reduced textures, the largest selected model, two zone textures (including an array), three distant textures (including volume slices), and one restored texture. Every output passed decoded hash verification on Xbox and a second verification after download using the independent Python archive reader. The sample generation and verification took 0.98 seconds; this is not a full-preparation time estimate. The one-second memory sampler did not capture that short run, so no Xbox peak-memory claim is made.
 
-The console currently has no complete original game archives, so the full preparation, D: interruption/resume test, and resulting gameplay launch remain untested. The existing game and launcher packages were not replaced. Probe data and generated samples stay private and are excluded from this repository.
+At the time of that sample test the console had no complete original game archives. Probe data and generated samples stay private and are excluded from this repository.
 
 The UWP native helper uses AppContainer CRT dependencies and no OpenMP. Free-space checks query the destination directory with `GetDiskFreeSpaceExW`; probing the root of the UWP package volume with `DriveInfo` was denied on Xbox.
+
+## Full Xbox preparation, launcher 0.4.0.1
+
+After USB import, the first full attempt stopped because the link check rejected the Windows-managed installed package mount. A console path audit confirmed that the package root has `ReparsePoint`, while the recipe directory and D: import/output parents are ordinary directories. The converter now trusts only `Package.Current.InstalledLocation` as the anchor for packaged recipe reads. Descendants still reject links, and imported files and writable output receive no exception. Four regression checks cover the trusted mount, rejection without trust, linked children, and sibling-prefix paths; all 33 converter/batch checks pass.
+
+The updated launcher was installed and successfully completed all 12 archive conversions, both index conversions, original-archive verification, and preparation commit on Xbox. The saved receipt and dashboard reported "Game prepared and verified. Ready to play." at 2026-10-10 02:59:51 UTC. Existing imported archives were reused without recopying from USB. This confirms full preparation; gameplay using these generated files and interrupted preparation on Xbox are separate outstanding tests. No new binary or game content is published in this repository.
 
 ## Build and test on Windows
 
@@ -50,4 +56,4 @@ The launcher's GPLv2/other-dependency compatibility and runtime redistribution r
 
 ## Remaining validation
 
-Run full packaged preparation on Xbox against a verified import; measure elapsed time and peak memory; test interruption/resume on its D: storage; then launch the prepared runtime and compare the known-working scene. The sample test confirms conversion compatibility, not completion of that end-to-end validation.
+Test interruption/resume on Xbox D: storage and collect reliable full-run memory/timing measurements; then launch the prepared runtime and compare the known-working scene. Full preparation passed, but that does not establish gameplay equivalence or complete release validation.

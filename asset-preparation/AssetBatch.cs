@@ -13,9 +13,24 @@ namespace AssetPreparation
     public static class AssetBatch
     {
         static string Name(string n) { Bytes.Require(n.Length>0&&n.Length<=80&&n!="."&&n!=".."&&n.All(c=>c>='a'&&c<='z'||c>='0'&&c<='9'||c=='_'||c=='.'||c=='-'),"Unsafe preparation filename");return n; }
-        static void NoLinks(string path)
+        // Only packaged, read-only recipes can use the OS-provided package mount.
+        // Imported data and writable output never receive this exception.
+        internal static void CheckPathLinks(string path,string trustedRoot,Func<string,FileAttributes?> attributes)
         {
-            for(string p=Path.GetFullPath(path);p!=null;p=Path.GetDirectoryName(p))if(Directory.Exists(p)||File.Exists(p))Bytes.Require((File.GetAttributes(p)&FileAttributes.ReparsePoint)==0,"Preparation paths cannot use links");
+            path=Path.GetFullPath(path);
+            if(trustedRoot!=null) {
+                trustedRoot=Path.GetFullPath(trustedRoot).TrimEnd('\\','/');
+                Bytes.Require(path.StartsWith(trustedRoot+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase),"Recipe path is outside the installed package");
+            }
+            for(string p=path;p!=null;p=Path.GetDirectoryName(p)) {
+                if(trustedRoot!=null&&p.Equals(trustedRoot,StringComparison.OrdinalIgnoreCase))return;
+                FileAttributes? value=attributes(p);
+                Bytes.Require(!value.HasValue||(value.Value&FileAttributes.ReparsePoint)==0,"Preparation paths cannot use links: "+p);
+            }
+        }
+        static void NoLinks(string path,string trustedRoot=null)
+        {
+            CheckPathLinks(path,trustedRoot,p=>Directory.Exists(p)||File.Exists(p)?(FileAttributes?)File.GetAttributes(p):null);
         }
         public static void Verify(string path,bool index,long length,string expected,CancellationToken cancel)
         {
@@ -36,7 +51,12 @@ namespace AssetPreparation
         public static List<GeneratedFile> Run(string source,string originalIndex,string recipes,string output,Action<string> progress,CancellationToken cancel)
         {
             cancel.ThrowIfCancellationRequested();source=Path.GetFullPath(source);output=Path.GetFullPath(output);recipes=Path.GetFullPath(recipes);originalIndex=Path.GetFullPath(originalIndex);
-            NoLinks(source);NoLinks(output);NoLinks(recipes);NoLinks(originalIndex);
+            string recipeMount=null;
+#if WINDOWS_UWP
+            string installed=Path.GetFullPath(Windows.ApplicationModel.Package.Current.InstalledLocation.Path).TrimEnd('\\','/');
+            if(recipes.StartsWith(installed+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))recipeMount=installed;
+#endif
+            NoLinks(source);NoLinks(output);NoLinks(recipes,recipeMount);NoLinks(originalIndex);
             string sp=source.TrimEnd('\\','/')+Path.DirectorySeparatorChar,op=output.TrimEnd('\\','/')+Path.DirectorySeparatorChar;
             Bytes.Require(!op.StartsWith(sp,StringComparison.OrdinalIgnoreCase)&&!sp.StartsWith(op,StringComparison.OrdinalIgnoreCase),"Generated output must be separate from input");
             string manifest=Path.Combine(recipes,"batch.tsv");Bytes.Require(new FileInfo(manifest).Length<=65536,"Oversized generation manifest");string[] lines=File.ReadAllLines(manifest);var header=lines[0].Split('\t');
@@ -46,7 +66,7 @@ namespace AssetPreparation
                 var r=line.Split('\t');Bytes.Require(r.Length==5&&(r[0]=="ARCHIVE"||r[0]=="INDEX")&&(!foundIndex||r[0]=="INDEX"),"Invalid generation order");Name(r[1]);Name(r[2]);Bytes.Require(names.Add(r[1])&&Bytes.IsHash(r[4]),"Duplicate or invalid generated file");
                 long size=long.Parse(r[3],CultureInfo.InvariantCulture);Bytes.Require(size>0&&size<uint.MaxValue,"Invalid decoded size");
                 if(r[0]=="INDEX") { Bytes.Require((r[1]=="toc"||r[1]=="runtime-toc")&&size<=64*1024*1024,"Invalid index");foundIndex=true; }else Bytes.Require(r[1].StartsWith("local_",StringComparison.Ordinal)&&r[1].EndsWith(".dsar",StringComparison.Ordinal),"Invalid archive filename");
-                string target=Path.Combine(output,r[1]);NoLinks(target);NoLinks(target+".partial");NoLinks(Path.Combine(recipes,r[2]));if(!File.Exists(target))space=checked(space+size);rows.Add(r);
+                string target=Path.Combine(output,r[1]);NoLinks(target);NoLinks(target+".partial");NoLinks(Path.Combine(recipes,r[2]),recipeMount);if(!File.Exists(target))space=checked(space+size);rows.Add(r);
             }
             Bytes.Require(foundIndex,"Missing generated index");Directory.CreateDirectory(output);Bytes.Require(DiskSpace.Available(output)>space+128L*1024*1024,"Insufficient space to generate assets");
             var result=new List<GeneratedFile>();int done=0;

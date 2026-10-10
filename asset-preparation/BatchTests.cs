@@ -19,6 +19,12 @@ static class BatchTests
     {
         string root=Path.Combine(Path.GetTempPath(),"AssetBatchTests-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(root);
         try {
+            string mount=Path.Combine(root,"package"),recipePath=Path.Combine(mount,"recipes","batch.tsv");
+            Func<string,FileAttributes?> packageAttributes=p=>p==mount?FileAttributes.Directory|FileAttributes.ReparsePoint:FileAttributes.Directory;
+            AssetBatch.CheckPathLinks(recipePath,mount,packageAttributes);Check(true,"Trusted package mount must be accepted for recipes");
+            Reject(()=>AssetBatch.CheckPathLinks(recipePath,null,packageAttributes));
+            Reject(()=>AssetBatch.CheckPathLinks(recipePath,mount,p=>p==Path.GetDirectoryName(recipePath)?FileAttributes.Directory|FileAttributes.ReparsePoint:FileAttributes.Directory));
+            Reject(()=>AssetBatch.CheckPathLinks(Path.Combine(root,"package-other","batch.tsv"),mount,packageAttributes));
             string source=Path.Combine(root,"source"),recipes=Path.Combine(root,"recipes"),output=Path.Combine(root,"output");Directory.CreateDirectory(source);Directory.CreateDirectory(recipes);
             byte[] tex=new byte[128+163840];Put(tex,0,0x5c4580b9);Put(tex,36,0x44415431);Put(tex,44,92);Bytes.Put16(tex,48,1);Put(tex,52,0x4ede3593);Put(tex,56,48);Put(tex,60,44);Put(tex,8,163840);Put(tex,20,163840);Put(tex,84,163840);Bytes.Put16(tex,92,512);Bytes.Put16(tex,94,512);Bytes.Put16(tex,96,512);Bytes.Put16(tex,98,512);Bytes.Put16(tex,100,1);Bytes.Put16(tex,104,72);tex[114]=2;
             for(int i=128;i<tex.Length;i++)tex[i]=(byte)(i*7);byte[] converted=Mip256.Transform(tex);
