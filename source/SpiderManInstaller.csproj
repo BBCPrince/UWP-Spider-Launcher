@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+ <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+ <PropertyGroup>
+  <Configuration Condition="'$(Configuration)' == ''">Release</Configuration><Platform Condition="'$(Platform)' == ''">x64</Platform>
+  <ProjectGuid>{D4C00E2F-E093-48FC-84E6-F08878207B77}</ProjectGuid><OutputType>AppContainerExe</OutputType>
+  <RootNamespace>SpiderManInstaller</RootNamespace><AssemblyName>SpiderManInstaller</AssemblyName><AppDesignerFolder>Properties</AppDesignerFolder>
+  <DefaultLanguage>en-US</DefaultLanguage><TargetPlatformIdentifier>UAP</TargetPlatformIdentifier><TargetPlatformVersion>10.0.26100.0</TargetPlatformVersion><TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+  <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion><FileAlignment>512</FileAlignment><ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled><AppxAutoIncrementPackageRevision>false</AppxAutoIncrementPackageRevision><AppxBundle>Never</AppxBundle><AppxSymbolPackageEnabled>false</AppxSymbolPackageEnabled><AppxPackageDir>$(ProjectDir)..\packages\</AppxPackageDir><RestoreProjectStyle>PackageReference</RestoreProjectStyle><LangVersion>9.0</LangVersion>
+ </PropertyGroup>
+ <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+  <OutputPath>bin\x64\Release\</OutputPath><DefineConstants>NETFX_CORE;WINDOWS_UWP</DefineConstants><Optimize>true</Optimize><DebugType>pdbonly</DebugType><PlatformTarget>x64</PlatformTarget><Prefer32Bit>false</Prefer32Bit><UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+ </PropertyGroup>
+ <ItemGroup><PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" /><PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" /><PackageReference Include="SteamKit2" Version="2.5.0" Condition="'$(SteamKitAssembly)' == ''" /><PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" /><PackageReference Include="protobuf-net" Version="3.2.26" /><PackageReference Include="QRCoder" Version="1.4.3" /></ItemGroup>
+ <ItemGroup>
+  <Reference Include="SteamKit2" Condition="'$(SteamKitAssembly)' != ''"><HintPath>$(SteamKitAssembly)</HintPath><Private>true</Private></Reference>
+  <Compile Include="..\asset-preparation\AssetGenerator.cs" /><Compile Include="..\asset-preparation\AssetBatch.cs" /><Compile Include="..\asset-preparation\AssetIndex.cs" /><Compile Include="..\asset-preparation\ModelLod.cs" /><Compile Include="..\asset-preparation\ResampledTexture.cs" />
+  <Content Include="..\asset-preparation\recipes\*.tsv"><Link>AssetRecipes\%(Filename)%(Extension)</Link></Content>
+  <Content Include="..\asset-preparation\bin\uwp\TextureConvert.dll"><Link>TextureConvert.dll</Link></Content><Compile Include="PreparationEngine.cs" /><Compile Include="GamePreparation.cs" /><Compile Include="GameContentCleanup.cs" />
+  <Content Include="..\licenses\*.txt"><Link>Licenses\%(Filename)%(Extension)</Link></Content>
+  <Content Include="..\THIRD-PARTY-NOTICES.txt"><Link>THIRD-PARTY-NOTICES.txt</Link></Content>
+  <Compile Include="App.xaml.cs"><DependentUpon>App.xaml</DependentUpon></Compile><Compile Include="MainPage.xaml.cs"><DependentUpon>MainPage.xaml</DependentUpon></Compile>
+  <Compile Include="LanguageImports.cs" /><Content Include="LanguagePacks.json" /><Compile Include="ImportEngine.cs" /><Compile Include="FolderImportEngine.cs" /><Compile Include="UsbFolderSource.cs" /><Compile Include="FolderProbe.cs" /><Compile Include="StorageProbe.cs" /><Compile Include="GameStorage.cs" /><Compile Include="FolderChecks.cs" /><Compile Include="SteamProbe.cs" /><Compile Include="SteamMachineIdentity.cs" /><Compile Include="SteamDownload.cs" /><Compile Include="SteamChecks.cs" /><Compile Include="SteamTransfer\*.cs" /><Compile Include="WifiReceiver.cs" /><Compile Include="WifiFolderTransfer.cs" /><Compile Include="WifiProtocol.cs" /><Content Include="WifiTransfer.html" /><Compile Include="Properties\AssemblyInfo.cs" />
+  <AppxManifest Include="Package.appxmanifest"><SubType>Designer</SubType></AppxManifest>
+  <Content Include="Properties\Default.rd.xml" /><Content Include="SteamFiles.json" /><Content Include="..\artwork\*.png"><Link>Assets\%(Filename)%(Extension)</Link></Content>
+  <ApplicationDefinition Include="App.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></ApplicationDefinition>
+  <Page Include="MainPage.xaml"><Generator>MSBuild:Compile</Generator><SubType>Designer</SubType></Page>
+ </ItemGroup>
+ <PropertyGroup Condition="'$(VisualStudioVersion)' == ''"><VisualStudioVersion>17.0</VisualStudioVersion></PropertyGroup>
+ <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+<Target Name="RequireReleaseReview" BeforeTargets="PrepareForBuild" Condition="'$(PrivateValidation)' != 'true'"><Error Text="Public binary release remains blocked by the recorded dependency-license review. Use /p:PrivateValidation=true only for a private test build; this does not approve redistribution." /></Target>
+</Project>
