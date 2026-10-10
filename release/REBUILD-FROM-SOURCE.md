@@ -1,4 +1,4 @@
-> Historical 0.5 review below. The 0.6 direct-SteamKit candidate removes DepotDownloader; see [current migration](STEAMKIT-MIGRATION.md). Other release requirements remain open.
+> Current source candidate: 0.6.0.1. See [project status](STATUS.md) before distributing a build.
 
 # Source and rebuild materials
 
@@ -19,7 +19,7 @@ From the launcher source root:
 .\tools\build-private.ps1
 python .\tests\test_release_audit.py
 .\tests\run-tests.ps1
-python .\tools\audit_release.py .\packages\SpiderManInstaller_0.5.0.0_x64_Test\SpiderManInstaller_0.5.0.0_x64.msix --packaging-only
+python .\tools\audit_release.py .\packages\SpiderManInstaller_0.6.0.1_x64_Test\SpiderManInstaller_0.6.0.1_x64.msix --packaging-only
 ```
 
 The native helper build downloads/checks the pinned DirectXTex revision and the pinned converter NuGet inputs. The launcher restores the framework and managed packages recorded in `DEPENDENCIES.json`. PrivateValidation is not a public-distribution approval.

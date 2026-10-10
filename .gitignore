@@ -2,12 +2,10 @@
 *
 !.gitignore
 !README.md
-!RELEASE-AUDIT.md
 !THIRD-PARTY-NOTICES.txt
 !DEPENDENCIES.json
 !SOURCE-SCOPE.md
 !LICENSE-REVIEW.md
-!TEST-RESULTS.txt
 !source/
 !source/*.cs
 !source/*.xaml
@@ -49,3 +47,13 @@
 !tests/steam-probe/
 !tests/steam-probe/*.cs
 !tests/steam-probe/*.csproj
+
+!docs/
+!docs/*.md
+!docs/images/
+!docs/images/banner.svg
+# Historical reports are preserved outside the working tree.
+release/LICENSE-CLARIFICATION-DRAFT.md
+release/PACKAGE-INVENTORY-0.5.0.0.json
+release/STEAMKIT-MIGRATION.md
+release/STEAMKIT-VALIDATION.json

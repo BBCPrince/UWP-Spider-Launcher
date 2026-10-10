@@ -52,7 +52,7 @@ Shared C# conversion code and synthetic tests: GPL-3.0-only, adapted from the pr
 
 Native texture adapter: MIT. DirectXTex: Microsoft MIT, pinned to `4feb3e11a020f35b796fc769a74216a555d4f5ef` (may2026). K4os.Compression.LZ4 1.3.8: MIT, with underlying LZ4 BSD notice retained. See licenses. Required .NET/Visual C++ runtime terms remain applicable.
 
-The launcher's GPLv2/other-dependency compatibility and runtime redistribution reviews remain open. This standalone source prototype and local test build do not establish permission to distribute a combined launcher/runtime binary or game-derived output.
+The current launcher uses an independent SteamKit downloader rather than DepotDownloader. Matching-source, framework, and separate-runtime distribution reviews remain open; see [project status](../release/STATUS.md). This component's source and local test build do not establish permission to distribute a combined runtime binary or game-derived output.
 
 ## Remaining validation
 
