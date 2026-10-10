@@ -19,8 +19,6 @@
 !source/Properties/
 !source/Properties/*.cs
 !source/Properties/*.xml
-!source/DepotDownloader/
-!source/DepotDownloader/*.cs
 !licenses/
 !licenses/*.txt
 !tests/
@@ -44,3 +42,10 @@
 !release/*.json
 !release/*.md
 !tests/test_release_audit.py
+
+!source/SteamTransfer/
+!source/SteamTransfer/*.cs
+
+!tests/steam-probe/
+!tests/steam-probe/*.cs
+!tests/steam-probe/*.csproj

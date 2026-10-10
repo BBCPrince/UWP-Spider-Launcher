@@ -1,13 +1,5 @@
 [
   {
-    "name": "DepotDownloader",
-    "repository": "SteamRE/DepotDownloader",
-    "commit": "ec692a8d9eaa9da4d966287e14fbc76d8ebe1081",
-    "url": "https://codeload.github.com/SteamRE/DepotDownloader/zip/ec692a8d9eaa9da4d966287e14fbc76d8ebe1081",
-    "sha256": "b7e46430bf3dd297aab9f3974986018550f362110084fec294fcd734163fd27c",
-    "license_evidence": "GPL-2.0; later-version grant unresolved"
-  },
-  {
     "name": "SteamKit",
     "repository": "SteamRE/SteamKit",
     "commit": "0c20a7d2aff9842815bf6b5aec657553e4186dd5",

@@ -14,7 +14,7 @@ ALLOWED_ROOT = {
 }
 ALLOWED_ART = {'Logo.png', 'SmallLogo.png', 'StoreLogo.png', 'SplashScreen.png'}
 REQUIRED_NOTICES = {
-    'THIRD-PARTY-NOTICES.txt', 'Licenses/DepotDownloader-GPL-2.0.txt',
+    'THIRD-PARTY-NOTICES.txt', 'Licenses/Launcher-GPL-3.0.txt',
     'Licenses/SteamKit-LGPL.txt', 'Licenses/SteamKit-Notices.txt',
     'Licenses/AssetConverter-GPL-3.0.txt', 'Licenses/Apache-2.0.txt',
     'Licenses/protobuf-net.txt', 'Licenses/QRCoder-MIT.txt',

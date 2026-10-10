@@ -1,24 +1,21 @@
-Private launcher validation candidate - 2026-10-09
+Private launcher validation candidate - 2026-10-10
 
 The source repository contains launcher/converter source, numeric recipes,
-notices, build tools, and synthetic tests. The 0.5.0.0 private test package
+notices, build tools, and synthetic tests. The 0.6.0.0 private test package
 contains the compiled launcher, its converter helper, recipes and notices.
 Neither includes game assets, game executable, game-engine source, compatibility
 runtime binaries or source, game binary-patch data, user saves or signing keys.
 The separate runtime supplies its private preparation support. This separation
 does not establish permission to redistribute that runtime.
 
-DepotDownloader 2.5.0
-https://github.com/SteamRE/DepotDownloader
-Commit ec692a8d9eaa9da4d966287e14fbc76d8ebe1081
-Upstream GNU GPL version 2 text: licenses/DepotDownloader-GPL-2.0.txt.
-The adapted source is in source/DepotDownloader. Changes made 2026-10-07
-through 2026-10-09 include UWP networking/device identity, QR UI, memory-only
-account storage, fixed version/file allowlists, cancellation, progress UI,
-bounded diagnostics, worker cleanup, and SHA-256 verification. Account-license
-acquisition and manifest-driven file deletion are disabled in the adaptation.
-The UWP adapters and progress/diagnostic helpers are included as source.
-Distribution of a combined binary is not yet approved; see LICENSE-REVIEW.md.
+Launcher Steam transfer implementation (2026-10-10)
+The downloader in source/SteamTransfer, SteamDownload.cs, SteamChecks.cs and
+SteamProbe.cs is a new implementation using the public SteamKit API directly.
+It is not an adaptation of DepotDownloader. These new files are licensed
+GPL-3.0-or-later; full text: licenses/Launcher-GPL-3.0.txt.
+DepotDownloader sources and compiled components are absent from this candidate.
+Earlier private revisions used DepotDownloader and retain their own notices
+in repository history. This statement does not relicense those earlier files.
 
 SteamKit2 2.5.0
 https://github.com/SteamRE/SteamKit
@@ -43,7 +40,7 @@ Owned-file asset converter
 GPL-3.0-only, adapted from the documented asset-format tools. Source, tests,
 provenance and build instructions are in asset-preparation. Full license:
 licenses/AssetConverter-GPL-3.0.txt. Recipes contain metadata, not asset bytes.
-Its combination with DepotDownloader remains a license review item.
+The combined converter/launcher retains the converter's GPL-3.0 requirements.
 
 TextureConvert / DirectXTex / K4os.Compression.LZ4
 The CPU texture helper's source is in asset-preparation/TextureConvert.cpp (MIT).
@@ -56,7 +53,7 @@ https://github.com/protobuf-net/protobuf-net
 Commit 9618de94145145228e115e8f134f132522e51f88
 Apache-2.0. Upstream attribution: licenses/protobuf-net.txt.
 Complete license: licenses/Apache-2.0.txt. Transitive SteamKit dependencies.
-GPL version compatibility remains an explicit release-review item.
+This dependency remains subject to its Apache-2.0 notices and conditions.
 
 Microsoft framework, SDK and runtime packages
 Their own licensing terms apply. The complete resolved package/version

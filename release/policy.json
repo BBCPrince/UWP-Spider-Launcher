@@ -1,11 +1,29 @@
 {
   "public_binary_approved": false,
   "required_reviews": {
-    "depotdownloader_gpl_version_compatibility": {"complete": false, "evidence": "Pinned upstream has GPL v2 text; no verified later-version grant or exception found."},
-    "native_linked_steamkit_rebuild": {"complete": true, "evidence": "Modified SteamKit 2.5.0 compiled and linked through .NET Native. Compiler input SHA256 f61775d67d7ceb47abd8541ac199f8aa84c8a3a7666b13889795bdc8f4bb8717 matched the rebuilt DLL."},
-    "matching_corresponding_source_bundle": {"complete": false, "evidence": "Private review bundle includes committed launcher/converter sources and seven hashed upstream source archives. Full legal scope including framework treatment and the final combined license remains unresolved; see REBUILD-FROM-SOURCE.md."},
-    "framework_redistribution": {"complete": false, "evidence": "Check exact shipped framework/helper binaries and notices against the applicable Microsoft redistribution terms."},
-    "fresh_install_user_test": {"complete": false, "evidence": "User volunteered a fresh test; no result for 0.5.0.0 yet."},
-    "separate_runtime_distribution": {"complete": false, "evidence": "Runtime support is outside the launcher. Owner cannot identify original supplier; saved-folder search did not establish a covering license. Detailed component categories are in REDISTRIBUTION-REVIEW.md."}
+    "native_linked_steamkit_rebuild": {
+      "complete": true,
+      "evidence": "Modified SteamKit 2.5.0 compiled and linked through .NET Native. Compiler input SHA256 f61775d67d7ceb47abd8541ac199f8aa84c8a3a7666b13889795bdc8f4bb8717 matched the rebuilt DLL."
+    },
+    "matching_corresponding_source_bundle": {
+      "complete": false,
+      "evidence": "Private review bundle includes committed launcher/converter sources and seven hashed upstream source archives. Full legal scope including framework treatment and the final combined license remains unresolved; see REBUILD-FROM-SOURCE.md."
+    },
+    "framework_redistribution": {
+      "complete": false,
+      "evidence": "Check exact shipped framework/helper binaries and notices against the applicable Microsoft redistribution terms."
+    },
+    "fresh_install_user_test": {
+      "complete": false,
+      "evidence": "User volunteered a fresh test; no result for 0.5.0.0 yet."
+    },
+    "separate_runtime_distribution": {
+      "complete": false,
+      "evidence": "Runtime support is outside the launcher. Owner cannot identify original supplier; saved-folder search did not establish a covering license. Detailed component categories are in REDISTRIBUTION-REVIEW.md."
+    },
+    "direct_steamkit_account_download": {
+      "complete": false,
+      "evidence": "New independent downloader builds and passes local transfer tests; account-approved download and Xbox validation pending."
+    }
   }
 }

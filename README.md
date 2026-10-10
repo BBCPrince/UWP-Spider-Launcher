@@ -6,10 +6,24 @@ Private release preparation for an Xbox Developer Mode launcher that imports a u
 
 The intended distribution includes the launcher, accurate dependency notices, and any required corresponding-source materials. Each user supplies their own legitimately owned game content. The game runtime is a separate UWP application.
 
+## Direct SteamKit candidate (0.6.0.0)
+
+This branch replaces DepotDownloader with an independently implemented SteamKit
+client. The test package uses `Local.SpiderManLauncherSteamKitTest` so it can be
+installed alongside the working 0.5 launcher. It still shares the game storage
+location: never run two imports/preparations at once. The currently installed
+Xbox launcher and game have not been replaced.
+
+QR approval, account-authorized pinned-manifest downloads, bounded workers,
+partial-chunk resume, SHA-256 file verification and credential-free event logs
+are implemented. USB/Wi-Fi import and asset preparation are retained. A live
+account-approved transfer on Xbox is still needed before replacing the working
+launcher. See [migration and tests](release/STEAMKIT-MIGRATION.md).
+
 ## Current status
 
 - Repository is private.
-- Initial package audit covered 0.3.5.1; the current private candidate is 0.5.0.0.
+- Initial package audit covered 0.3.5.1; the installed launcher is 0.5.0.0 and this branch tests 0.6.0.0.
 - USB folder import and local Wi-Fi folder transfer are implemented in the local build.
 - Steam download uses Steam mobile QR approval.
 - Release packaging and dependency compliance work remain unfinished.
