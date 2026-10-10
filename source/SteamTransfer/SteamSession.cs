@@ -94,7 +94,7 @@ namespace SpiderManInstaller.SteamTransfer
         public async Task<QrAuthSession> CreateQr(Action<string> show)
         {
             var auth = await Wait(client.Authentication.BeginAuthSessionViaQRAsync(new AuthSessionDetails
-            { DeviceFriendlyName = "Spider-Man Launcher", IsPersistentSession = false })).ConfigureAwait(false);
+            { DeviceFriendlyName = "UWP Spider Launcher", IsPersistentSession = false })).ConfigureAwait(false);
             auth.ChallengeURLChanged = () => show(auth.ChallengeURL);
             show(auth.ChallengeURL); trace.Record(TransferEvent.QrReady); return auth;
         }
@@ -111,7 +111,7 @@ namespace SpiderManInstaller.SteamTransfer
                     showQr(null);
                     user.LogOn(new SteamUser.LogOnDetails { Username = result.AccountName,
                         AccessToken = result.RefreshToken, ShouldRememberPassword = false,
-                        LoginID = BitConverter.ToUInt32(Guid.NewGuid().ToByteArray(), 0), MachineName = "Spider-Man Launcher" });
+                        LoginID = BitConverter.ToUInt32(Guid.NewGuid().ToByteArray(), 0), MachineName = "UWP Spider Launcher" });
                     result = null; // Session-only credentials; never persisted or logged.
                 }
                 var outcome = await Wait(loggedOn.Task).ConfigureAwait(false);
