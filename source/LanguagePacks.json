@@ -1,0 +1,86 @@
+[
+  {
+    "language": "english",
+    "label": "English",
+    "path": "asset_archive/a00s034.us",
+    "size": 1221464064,
+    "sha256": "087db484ef13adbac05995ebb4b8910973942800b67c2fadf7d0a3c7e9536539"
+  },
+  {
+    "language": "french",
+    "label": "French",
+    "path": "asset_archive/a00s035.fr",
+    "size": 1277779968,
+    "sha256": "8fa7abb914d92c770c09add36a7cac1d1accb2516aac4b85d952f5df43418299"
+  },
+  {
+    "language": "german",
+    "label": "German",
+    "path": "asset_archive/a00s036.de",
+    "size": 1307115520,
+    "sha256": "320055ba5ab1ae7226a300524915255c3ff38c8e53ad7eef0794e5d541fd371d"
+  },
+  {
+    "language": "italian",
+    "label": "Italian",
+    "path": "asset_archive/a00s037.it",
+    "size": 1294172160,
+    "sha256": "c6766cbd0d6c6a902a7550766b591acd8e2f6fe9b3869116f79c1c0b1a3e2336"
+  },
+  {
+    "language": "japanese",
+    "label": "Japanese",
+    "path": "asset_archive/a00s038.jp",
+    "size": 1251545088,
+    "sha256": "f2e69cf3536e7381c6ac4bf28d9c68756812aff03ea965ae8a2a3e1be2e7edc8"
+  },
+  {
+    "language": "polish",
+    "label": "Polish",
+    "path": "asset_archive/a00s039.pl",
+    "size": 1278418944,
+    "sha256": "5d295a8627c30d934efb58c1acaa987e6b62206b485889a9419816b6de46cfb6"
+  },
+  {
+    "language": "portuguese",
+    "label": "Portuguese (Portugal)",
+    "path": "asset_archive/a00s040.pt",
+    "size": 1208074240,
+    "sha256": "3586d150a8d7b34b86dfe91e45d20d5c2cdadff5256570c8b55b31112883575e"
+  },
+  {
+    "language": "russian",
+    "label": "Russian",
+    "path": "asset_archive/a00s041.ru",
+    "size": 1265258496,
+    "sha256": "792f0729b72415bc61766b6ffb4346f53fbc31d8a79220d32e24b759a2dac649"
+  },
+  {
+    "language": "spanish",
+    "label": "Spanish (Spain)",
+    "path": "asset_archive/a00s042.es",
+    "size": 1303658496,
+    "sha256": "fbaec6e097e4d78cfad14be667f306951506052610aff425b657a33e33b13200"
+  },
+  {
+    "language": "brazilian",
+    "label": "Portuguese (Brazil)",
+    "path": "asset_archive/a00s043.br",
+    "size": 1238794240,
+    "sha256": "caddaf4763cefa67d4d0b3a8a66260d1fd71b94aa0b4ebc3bc4b8c3f432f1c31"
+  },
+  {
+    "language": "arabic",
+    "label": "Arabic",
+    "path": "asset_archive/a00s044.ar",
+    "size": 1251733504,
+    "sha256": "dcf46d83bb55886004f7a88b2d335b29b135736811618f09552a8f8945ae77e6"
+  },
+  {
+    "language": "latam",
+    "label": "Spanish (Latin America)",
+    "path": "asset_archive/a00s045.la",
+    "size": 1321164800,
+    "sha256": "edf7985fe07748906baed4ee892f8d6929c1ce81efca8d636532fa3ef9206553"
+  }
+]

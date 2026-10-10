@@ -2,7 +2,7 @@
 
 Private release preparation for an Xbox Developer Mode launcher that imports a user's own supported Steam game files through USB, local Wi-Fi, or authenticated Steam download.
 
-**No installable release is uploaded yet.** This repository currently contains release preparation notes only. The working local package includes modified game assets and compatibility binaries that must be separated or reviewed before a launcher-only distribution is ready.
+**No installable release is uploaded yet.** This repository contains launcher source for review, synthetic tests, dependency/license information, and release preparation notes. It excludes game assets, game-engine code, compatibility runtime code/binaries, and game binary-patch data. The working local package is not included.
 
 The intended distribution includes the launcher, accurate dependency notices, and any required corresponding-source materials. Each user supplies their own legitimately owned game content. The game runtime is a separate UWP application.
 
@@ -14,4 +14,4 @@ The intended distribution includes the launcher, accurate dependency notices, an
 - Steam download uses Steam mobile QR approval.
 - Release packaging and dependency compliance work remain unfinished.
 
-See [the release audit](RELEASE-AUDIT.md) for the remaining work. Keep the repository private until the owner explicitly requests otherwise.
+See [source scope and tests](SOURCE-SCOPE.md), [license review](LICENSE-REVIEW.md), and [the original package audit](RELEASE-AUDIT.md). The source snapshot is not a complete release build; a build guard prevents accidentally packaging its unfinished preparation path. Keep the repository private until the owner explicitly requests otherwise.

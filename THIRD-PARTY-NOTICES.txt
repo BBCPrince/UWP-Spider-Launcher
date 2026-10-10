@@ -1,0 +1,51 @@
+Private launcher source review - 2026-10-09
+
+This repository contains launcher application source and synthetic tests only.
+It contains no game assets, game executable, game-engine source, compatibility
+runtime binaries or source, game binary-patch data, user saves, private signing
+keys, recordings, or compiled launcher package. Paths and SHA-256 fingerprints
+of supported user-supplied files are validation metadata, not game content.
+
+DepotDownloader 2.5.0
+https://github.com/SteamRE/DepotDownloader
+Commit ec692a8d9eaa9da4d966287e14fbc76d8ebe1081
+Upstream GNU GPL version 2 text: licenses/DepotDownloader-GPL-2.0.txt.
+The adapted source is in source/DepotDownloader. Changes made 2026-10-07
+through 2026-10-09 include UWP networking/device identity, QR UI, memory-only
+account storage, fixed version/file allowlists, cancellation, progress UI,
+bounded diagnostics, worker cleanup, and SHA-256 verification. Account-license
+acquisition and manifest-driven file deletion are disabled in the adaptation.
+The UWP adapters and progress/diagnostic helpers are included as source.
+Distribution of a combined binary is not yet approved; see LICENSE-REVIEW.md.
+
+SteamKit2 2.5.0
+https://github.com/SteamRE/SteamKit
+Commit 0c20a7d2aff9842815bf6b5aec657553e4186dd5
+LGPL-2.1-only. Full text and upstream notices are in licenses/SteamKit-LGPL.txt
+and licenses/SteamKit-Notices.txt. Referenced via NuGet; no library binary is
+included in this source snapshot. SteamMachineIdentity uses its extension API.
+Any future native-linked distribution must supply the required corresponding
+source and a practical way to rebuild/relink with a modified library.
+
+QRCoder 1.4.3
+https://github.com/codebude/QRCoder
+MIT. Copyright notice and license: licenses/QRCoder-MIT.txt.
+QR encoding is local. Referenced via NuGet, no library binary included.
+
+protobuf-net and protobuf-net.Core 3.2.26
+https://github.com/protobuf-net/protobuf-net
+Commit 9618de94145145228e115e8f134f132522e51f88
+Apache-2.0. Upstream attribution: licenses/protobuf-net.txt.
+Complete license: licenses/Apache-2.0.txt. Transitive SteamKit dependencies.
+GPL version compatibility remains an explicit release-review item.
+
+Microsoft framework, SDK and runtime packages
+Their own licensing terms apply. The complete resolved package/version
+inventory and the available NuGet license metadata are in DEPENDENCIES.json.
+No SDK/framework binaries are included here. Required notices/redistribution
+terms must be checked against the actual future package contents.
+
+Names of games, platforms, and services identify compatibility targets only.
+This is an unofficial project, not endorsed by Sony, Marvel, Insomniac Games,
+Valve, or Microsoft. An ownership requirement and this notice do not constitute
+legal clearance for a port, runtime, patch, or distribution.

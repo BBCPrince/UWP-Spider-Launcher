@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+ xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+ xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" IgnorableNamespaces="uap mp">
+ <Identity Name="Local.SpiderManLauncher" Publisher="CN=SpiderMan Import Test" Version="0.3.5.1" />
+ <mp:PhoneIdentity PhoneProductId="d4c00e2f-e093-48fc-84e6-f08878207b77" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+ <Properties><DisplayName>Spider-Man Launcher</DisplayName><PublisherDisplayName>Local Test</PublisherDisplayName><Logo>Assets\StoreLogo.png</Logo></Properties>
+ <Dependencies><TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" /></Dependencies>
+ <Resources><Resource Language="x-generate" /></Resources>
+ <Applications>
+  <Application Id="App" Executable="SpiderManInstaller.exe" EntryPoint="SpiderManInstaller.App">
+   <uap:VisualElements DisplayName="Spider-Man Launcher" Description="Import, prepare and play your own Steam game on Xbox" BackgroundColor="#111827" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png">
+    <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#111827" />
+   </uap:VisualElements>
+   <Extensions><uap:Extension Category="windows.fileTypeAssociation"><uap:FileTypeAssociation Name="spidermanimport"><uap:SupportedFileTypes><uap:FileType>.zip</uap:FileType></uap:SupportedFileTypes></uap:FileTypeAssociation></uap:Extension></Extensions>
+  </Application>
+ </Applications>
+ <Capabilities><Capability Name="internetClient" /><Capability Name="privateNetworkClientServer" /><uap:Capability Name="removableStorage" /></Capabilities>
+</Package>
+
+
