@@ -1,3 +1,5 @@
+> Historical 0.5 review below. The 0.6 direct-SteamKit candidate removes DepotDownloader; see [current migration](STEAMKIT-MIGRATION.md). Other release requirements remain open.
+
 # Release status — October 9, 2026
 
 **Private test candidate; public binary release is not ready.** The repository remains private. A successful game launch is evidence of functionality, not permission to distribute every dependency.

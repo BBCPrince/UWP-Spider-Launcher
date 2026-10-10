@@ -1,3 +1,5 @@
+> For the 0.6 direct-SteamKit candidate, see [migration status](release/STEAMKIT-MIGRATION.md). Details below describe the earlier 0.5 review.
+
 # Outstanding license review
 
 This repository is private and has no downloadable binary release. License texts and source are provided for review; this is not a legal clearance statement.

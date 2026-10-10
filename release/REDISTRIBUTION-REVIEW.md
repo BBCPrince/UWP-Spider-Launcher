@@ -1,3 +1,5 @@
+> Historical 0.5 review below. The 0.6 direct-SteamKit candidate removes DepotDownloader; see [current migration](STEAMKIT-MIGRATION.md). Other release requirements remain open.
+
 # Redistribution review — October 10, 2026
 
 This is a technical provenance and license-evidence review, not a legal clearance. The installed private test remains unchanged. The launcher and separate runtime have different release boundaries.

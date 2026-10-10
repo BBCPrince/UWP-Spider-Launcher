@@ -1,15 +1,39 @@
-# Spider-Man Launcher
+# UWP Spider Launcher
 
 Private release preparation for an Xbox Developer Mode launcher that imports a user's own supported Steam game files through USB, local Wi-Fi, or authenticated Steam download.
+
+Unofficial, independent project. Not affiliated with or endorsed by Microsoft, Valve, Sony, Marvel, or the game's developers or publishers.
+
+The 0.6.0.1 branding update changes the app display name, launcher header, Wi-Fi page, and Steam sign-in device name. The existing package identity is retained so it can update the test launcher without creating another installation.
+
+## What is included in each download
+
+The installable UWP package includes the application, preparation recipes, and required license notices. It does not include repository test results, release-audit reports, or release-planning Markdown files.
+
+The source repository and its GitHub-generated source ZIP include tracked documentation such as `RELEASE-AUDIT.md`, `TEST-RESULTS.txt`, and the `release/` review notes. Those remain private while the repository is private; changing the repository to public would expose them and its Git history. A public-source cleanup has not been performed.
 
 **No installable release is uploaded yet.** This repository contains launcher source for review, synthetic tests, dependency/license information, and release preparation notes. It excludes game assets, game-engine code, compatibility runtime code/binaries, and game binary-patch data. The working local package is not included.
 
 The intended distribution includes the launcher, accurate dependency notices, and any required corresponding-source materials. Each user supplies their own legitimately owned game content. The game runtime is a separate UWP application.
 
+## Direct SteamKit candidate (0.6.0.0)
+
+This branch replaces DepotDownloader with an independently implemented SteamKit
+client. The test package uses `Local.SpiderManLauncherSteamKitTest` so it can be
+installed alongside the working 0.5 launcher. It still shares the game storage
+location: never run two imports/preparations at once. The currently installed
+Xbox launcher and game have not been replaced.
+
+QR approval, account-authorized pinned-manifest downloads, bounded workers,
+partial-chunk resume, SHA-256 file verification and credential-free event logs
+are implemented. USB/Wi-Fi import and asset preparation are retained. A live
+account-approved transfer on Xbox is still needed before replacing the working
+launcher. See [migration and tests](release/STEAMKIT-MIGRATION.md).
+
 ## Current status
 
 - Repository is private.
-- Initial package audit covered 0.3.5.1; the current private candidate is 0.5.0.0.
+- Initial package audit covered 0.3.5.1; the installed launcher is 0.5.0.0 and this branch tests 0.6.0.0.
 - USB folder import and local Wi-Fi folder transfer are implemented in the local build.
 - Steam download uses Steam mobile QR approval.
 - Release packaging and dependency compliance work remain unfinished.

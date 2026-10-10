@@ -1,3 +1,5 @@
+> For the 0.6 direct-SteamKit candidate, see [migration status](release/STEAMKIT-MIGRATION.md). Details below describe the earlier 0.5 review.
+
 # Launcher source scope
 
 Included: the C#/XAML launcher, USB/ZIP/Wi-Fi import and validation logic, Steam QR download integration and its adapted DepotDownloader source, launcher preparation orchestration, storage cleanup logic, version fingerprints, license notices, and tests using synthetic files.

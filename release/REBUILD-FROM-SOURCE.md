@@ -1,3 +1,5 @@
+> Historical 0.5 review below. The 0.6 direct-SteamKit candidate removes DepotDownloader; see [current migration](STEAMKIT-MIGRATION.md). Other release requirements remain open.
+
 # Source and rebuild materials
 
 The private review bundle contains the reviewed launcher/converter tree, upstream source archives, hashes, dependency metadata and these build instructions. It excludes the game, saves, credentials, private package-signing keys and compatibility runtime source/binaries. Upstream source archives preserve their own test fixtures and public build files; they are not files taken from a game installation.

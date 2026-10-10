@@ -6,12 +6,13 @@ $output = Join-Path $repo 'test-output'
 New-Item -ItemType Directory -Path $output -Force | Out-Null
 $common = @('ImportEngine.cs', 'LanguageImports.cs', 'FolderImportEngine.cs', 'PreparationEngine.cs') | ForEach-Object { Join-Path $repo "source\$_" }
 $references = @('/r:System.IO.Compression.dll','/r:System.IO.Compression.FileSystem.dll','/r:System.Runtime.Serialization.dll','/r:System.Web.Extensions.dll')
-foreach ($name in @('ImportTests','LanguageTests','WifiTests','PreparationTests','CleanupTests','DownloadProgressTests','TransferDiagnosticsTests')) {
+foreach ($name in @('ImportTests','LanguageTests','WifiTests','PreparationTests','CleanupTests','DownloadProgressTests','TransferDiagnosticsTests','SteamTransferTests')) {
     $extra = switch ($name) {
+        'SteamTransferTests' { @('SteamTransfer\TransferCore.cs','SteamTransfer\Progress.cs') }
         'WifiTests' { @('WifiFolderTransfer.cs','WifiProtocol.cs') }
         'CleanupTests' { @('GameContentCleanup.cs') }
-        'DownloadProgressTests' { @('DepotDownloader\DownloadProgress.cs') }
-        'TransferDiagnosticsTests' { @('DepotDownloader\TransferDiagnostics.cs') }
+        'DownloadProgressTests' { @('SteamTransfer\Progress.cs') }
+        'TransferDiagnosticsTests' { @('SteamTransfer\TransferTrace.cs') }
         default { @() }
     }
     $files = @($common) + @($extra | ForEach-Object { Join-Path $repo "source\$_" }) + @(Join-Path $PSScriptRoot "$name.cs")

@@ -14,8 +14,8 @@
   <Grid.RowDefinitions><RowDefinition Height="44"/><RowDefinition Height="*"/><RowDefinition Height="80"/></Grid.RowDefinitions>
   <Grid>
    <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Top">
-    <Border Background="#D22E49" CornerRadius="5" Width="34" Height="34"><TextBlock Text="SM" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/></Border>
-    <StackPanel><TextBlock Text="SPIDER-MAN" FontSize="20" FontWeight="Bold" CharacterSpacing="100"/><TextBlock Text="REMASTERED  /  LAUNCHER" Foreground="#929CAF" FontSize="10" CharacterSpacing="120"/></StackPanel>
+    <Border Background="#D22E49" CornerRadius="5" Width="34" Height="34"><TextBlock Text="US" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/></Border>
+    <StackPanel><TextBlock Text="UWP Spider Launcher" FontSize="20" FontWeight="Bold" CharacterSpacing="100"/><TextBlock Text="UNOFFICIAL GAME LAUNCHER" Foreground="#929CAF" FontSize="10" CharacterSpacing="120"/></StackPanel>
    </StackPanel>
    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Text="XBOX DEVELOPER MODE" Foreground="#A4B0C2" FontSize="11" CharacterSpacing="90"/>
   </Grid>
