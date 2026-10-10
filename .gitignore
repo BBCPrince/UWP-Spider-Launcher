@@ -1,0 +1,5 @@
+# Deny by default: only explicitly reviewed release documentation is tracked.
+*
+!.gitignore
+!README.md
+!RELEASE-AUDIT.md
