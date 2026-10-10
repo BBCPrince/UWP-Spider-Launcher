@@ -51,9 +51,8 @@ The app uses C#/XAML and the UWP .NET Native toolchain. Preparation uses shared 
 | Folder | Contents |
 | --- | --- |
 | `source/` | Launcher UI, imports, Steam transfer, and preparation orchestration |
-| `asset-preparation/` | Converter source, numeric recipes, and synthetic checks |
-| `tests/` | Automated checks using synthetic files |
-| `tools/` | Build, icon generation, source collection, and package checks |
+| `asset-preparation/` | Converter source and numeric recipes |
+| `build/` | Launcher build and icon-generation scripts |
 | `licenses/` | Third-party license texts |
 | `docs/` | User documentation and original project artwork |
 | `release/` | Build instructions, dependency pins, and release requirements |

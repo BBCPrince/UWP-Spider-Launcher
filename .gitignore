@@ -19,9 +19,6 @@
 !source/Properties/*.xml
 !licenses/
 !licenses/*.txt
-!tests/
-!tests/*.cs
-!tests/run-tests.ps1
 !asset-preparation/
 !asset-preparation/*.cs
 !asset-preparation/*.cpp
@@ -33,20 +30,19 @@
 !asset-preparation/recipes/*.tsv
 !asset-preparation/licenses/
 !asset-preparation/licenses/*.txt
-!tools/
-!tools/*.py
-!tools/*.ps1
+!build/
+!build/build-launcher.ps1
+!build/make-icons.ps1
 !release/
-!release/*.json
-!release/*.md
-!tests/test_release_audit.py
+!release/SOURCE-INPUTS.json
+!release/STEAMKIT-SOURCE.json
+!release/STATUS.md
+!release/REBUILD-FROM-SOURCE.md
+!release/REDISTRIBUTION-REVIEW.md
 
 !source/SteamTransfer/
 !source/SteamTransfer/*.cs
 
-!tests/steam-probe/
-!tests/steam-probe/*.cs
-!tests/steam-probe/*.csproj
 
 !docs/
 !docs/*.md
@@ -57,3 +53,4 @@ release/LICENSE-CLARIFICATION-DRAFT.md
 release/PACKAGE-INVENTORY-0.5.0.0.json
 release/STEAMKIT-MIGRATION.md
 release/STEAMKIT-VALIDATION.json
+asset-preparation/*Tests.cs

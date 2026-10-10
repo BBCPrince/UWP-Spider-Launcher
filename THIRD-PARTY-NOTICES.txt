@@ -1,7 +1,7 @@
 UWP Spider Launcher - third-party notices
 
 The source repository contains launcher/converter source, numeric recipes,
-notices, build tools, and synthetic tests. The 0.6.x private test package
+notices and build tools. Optional test suites are maintained separately. The 0.6.x private test package
 contains the compiled launcher, its converter helper, recipes and notices.
 Neither includes game assets, game executable, game-engine source, compatibility
 runtime binaries or source, game binary-patch data, user saves or signing keys.

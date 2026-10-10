@@ -11,4 +11,4 @@ if ($SteamKitAssembly) {
 }
 & $msbuild (Join-Path $repo 'source\SpiderManInstaller.csproj') @options
 if ($LASTEXITCODE -ne 0) { throw 'Private validation build failed.' }
-Write-Output 'Private validation build complete. This does not approve public binary redistribution. Run the package audit and read release/STATUS.md.'
+Write-Output 'Launcher build complete. This does not approve public binary redistribution. Read release/STATUS.md.'

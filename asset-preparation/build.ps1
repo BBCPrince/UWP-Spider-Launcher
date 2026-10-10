@@ -36,10 +36,4 @@ try {
     $references = @('/r:bin\K4os.Compression.LZ4.dll','/r:bin\System.Memory.dll','/r:System.IO.Compression.dll')
     & $compiler /nologo /target:exe /optimize+ /platform:x64 /out:bin\AssetGenerator.exe @references @source
     if ($LASTEXITCODE -ne 0) { throw 'Converter build failed.' }
-    foreach ($test in @('GeneratorTests','BatchTests')) {
-        & $compiler /nologo /target:exe /optimize+ /platform:x64 "/main:$test" "/out:bin\$test.exe" @references @source "$test.cs"
-        if ($LASTEXITCODE -ne 0) { throw "Test build failed: $test" }
-        & (Join-Path $componentRoot "bin\$test.exe")
-        if ($LASTEXITCODE -ne 0) { throw "Test failed: $test" }
-    }
 } finally { Pop-Location }

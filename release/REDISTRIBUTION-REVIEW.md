@@ -13,4 +13,4 @@ Neither is a game or runtime bundle. A separately installed runtime supplies pre
 
 SteamKit's pinned source and package metadata use different license labels; both are retained in the notices. The .NET Native build can use a rebuilt SteamKit assembly through `-SteamKitAssembly`. That tested path is one part of the matching-source/rebuild arrangement, not the completed distribution review.
 
-Framework terms, exact corresponding-source scope, and separate runtime provenance remain open. Historical review transcripts and inventories are archived locally; current requirements are in `STATUS.md` and `policy.json`.
+Framework terms, exact corresponding-source scope, and separate runtime provenance remain open. Internal review tools, checklists, and machine-readable approval records are maintained privately; current requirements are summarized in `STATUS.md`.
