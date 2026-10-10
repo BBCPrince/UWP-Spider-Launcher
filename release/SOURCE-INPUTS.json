@@ -1,0 +1,58 @@
+[
+  {
+    "name": "DepotDownloader",
+    "repository": "SteamRE/DepotDownloader",
+    "commit": "ec692a8d9eaa9da4d966287e14fbc76d8ebe1081",
+    "url": "https://codeload.github.com/SteamRE/DepotDownloader/zip/ec692a8d9eaa9da4d966287e14fbc76d8ebe1081",
+    "sha256": "b7e46430bf3dd297aab9f3974986018550f362110084fec294fcd734163fd27c",
+    "license_evidence": "GPL-2.0; later-version grant unresolved"
+  },
+  {
+    "name": "SteamKit",
+    "repository": "SteamRE/SteamKit",
+    "commit": "0c20a7d2aff9842815bf6b5aec657553e4186dd5",
+    "url": "https://codeload.github.com/SteamRE/SteamKit/zip/0c20a7d2aff9842815bf6b5aec657553e4186dd5",
+    "sha256": "ec4667597b9fbbdd089f01cb00115583ad3c93411ecc8ac8f10c183342d9d247",
+    "license_evidence": "LGPL-2.1-or-later source notice; NuGet says LGPL-2.1-only"
+  },
+  {
+    "name": "protobuf-net",
+    "repository": "protobuf-net/protobuf-net",
+    "commit": "9618de94145145228e115e8f134f132522e51f88",
+    "url": "https://codeload.github.com/protobuf-net/protobuf-net/zip/9618de94145145228e115e8f134f132522e51f88",
+    "sha256": "42a5318c9801a2747362a14e86be0e95aaa059dab650470aed128ce9df31de6f",
+    "license_evidence": "Apache-2.0"
+  },
+  {
+    "name": "QRCoder",
+    "repository": "codebude/QRCoder",
+    "commit": "cecf2066d3f3a74b142aaa7c8d9f744c4673118c",
+    "url": "https://codeload.github.com/codebude/QRCoder/zip/cecf2066d3f3a74b142aaa7c8d9f744c4673118c",
+    "sha256": "67c08dd6455d38b049a7c377bd378723a325a1451644a7aadc2d0b93bc687f50",
+    "license_evidence": "MIT"
+  },
+  {
+    "name": "K4os-LZ4",
+    "repository": "MiloszKrajewski/K4os.Compression.LZ4",
+    "commit": "f5a25b7d72e2e41550fe20662597169ff11c3b60",
+    "url": "https://codeload.github.com/MiloszKrajewski/K4os.Compression.LZ4/zip/f5a25b7d72e2e41550fe20662597169ff11c3b60",
+    "sha256": "3490cabe2233299b88927915930134e9a5401c5c96a4a550f0d895559a8c4f4e",
+    "license_evidence": "MIT with LZ4 BSD notice"
+  },
+  {
+    "name": "DirectXTex",
+    "repository": "microsoft/DirectXTex",
+    "commit": "4feb3e11a020f35b796fc769a74216a555d4f5ef",
+    "url": "https://codeload.github.com/microsoft/DirectXTex/zip/4feb3e11a020f35b796fc769a74216a555d4f5ef",
+    "sha256": "95f4c7dd949cfdc2d3228594254b9d2c2812847319d6c33e9844c07487dfdde1",
+    "license_evidence": "MIT"
+  },
+  {
+    "name": "ALERT",
+    "repository": "Tkachov/ALERT",
+    "commit": "bc90ed9b53fbcaa3b7acf94b36f00e77eab0dacb",
+    "url": "https://codeload.github.com/Tkachov/ALERT/zip/bc90ed9b53fbcaa3b7acf94b36f00e77eab0dacb",
+    "sha256": "f58f6c78b07c9e7eecbe465e2264cc684034b97639610d153d794e84f5b6f9fc",
+    "license_evidence": "GPL-3.0; provenance reference"
+  }
+]

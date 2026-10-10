@@ -1,0 +1,295 @@
+{
+  "reference_package_sha256": "41e4803f2638298eff0c2fb37624cb8d6794adb328efffc7158179721bc0ccce",
+  "entries": [
+    {
+      "entry": "clrcompression.dll",
+      "bytes": 66960,
+      "sha256": "b16a75adce8c335ee16b85b9a98307221466710457bf9e60865da91a2798e0fe",
+      "category": "Microsoft-UWP-framework-component"
+    },
+    {
+      "entry": "Licenses/Microsoft-UWP.txt",
+      "bytes": 11283,
+      "sha256": "ed1691e38983ebe2fe38f30eded7301a8917a556b4f3bad370eba324faf51ded",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/Microsoft-UWP-ThirdParty.txt",
+      "bytes": 1972,
+      "sha256": "6cc9bc2ff29dfa1092c1e4c363254fddd50af903aefccf7ab7f92db043587ebb",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/AssetConverter-GPL-3.0.txt",
+      "bytes": 35823,
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "SteamFiles.json",
+      "bytes": 8849,
+      "sha256": "09859fafba3bd21dab2d7db0116a92a48faa574be1c8428eac09ef5631911301",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "LanguagePacks.json",
+      "bytes": 2596,
+      "sha256": "4d79689bf9a485367b36ee600018d7f097f56a51022c3b771c75ac0397e111c7",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "WifiTransfer.html",
+      "bytes": 7522,
+      "sha256": "bfbd5a3b53d8800a428b029e6d719b542928cb54ff4932736cfe2c91b8b21459",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/SteamKit-LGPL.txt",
+      "bytes": 24944,
+      "sha256": "68714d7a568c758d2d02d111aba51f71c3ba66ce94e9c147303a7c7d69fb37b3",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/SteamKit-Notices.txt",
+      "bytes": 768,
+      "sha256": "d0c87e66d00e92e13cfa07158bf07e9be65e18aa5220d06af8532092521e78fa",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/QRCoder-MIT.txt",
+      "bytes": 1088,
+      "sha256": "044bd5eeee412a603a6e2b6201c7256da386788aaa4392be9870a5e899adea05",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/protobuf-net.txt",
+      "bytes": 998,
+      "sha256": "2054377b5c04fb70c67fe91ca12417e9d413e533169f1270ef69bd815f3053f3",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/DepotDownloader-GPL-2.0.txt",
+      "bytes": 18431,
+      "sha256": "189b1af95d661151e054cea10c91b3d754e4de4d3fecfb074c1fb29476f7167b",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "AssetRecipes/mip256-full.tsv",
+      "bytes": 3721037,
+      "sha256": "ea72245c1d56714f033ec9c56c184e4bc8026f229b90e4946fe0e428bc8f9d28",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_street12_sd512_20260918.dsar.tsv",
+      "bytes": 2294,
+      "sha256": "0b237411edf384296eb268c6714e5c98e0042012e583b07ddb5a5a9a00a927ca",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_opening51_1024_20260919.dsar.tsv",
+      "bytes": 13825,
+      "sha256": "f765527eb64a543d292ed2c43a751284cba670873c9ae2b81b64de400c8d08fb",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_openingroom36_1024_20260919.dsar.tsv",
+      "bytes": 9789,
+      "sha256": "d8b76a534698f8b0aa1b05a330a0c95564dbeb1d16e90c7b252f94380968091b",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_openingfinishes9_1024_20260919.dsar.tsv",
+      "bytes": 2498,
+      "sha256": "267ff9ea3e2506bb033e58ac7b50727450c7e05d473d2309ed46997e70e3c35f",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_openingscreen3_1024_20260919.dsar.tsv",
+      "bytes": 892,
+      "sha256": "6348e93ede35946a8a0ea142e634c6c9d69b083e9c0f671b626f23eaede2061f",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_openingbroad111_512_20260919.dsar.tsv",
+      "bytes": 21765,
+      "sha256": "bdc65d8168349c19b318b9197d2f99c3ac6c108b7aaf529c69b21bdd15a65cba",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_openingbill3_1024_20260919.dsar.tsv",
+      "bytes": 892,
+      "sha256": "23821e0c632a6a773d5005fa9705b5c9b029c9011282f8fd20acb6db2bf12c0f",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_ground29_1024_20260923.dsar.tsv",
+      "bytes": 7899,
+      "sha256": "e98e9061864b512221c05b4584ffe865d3ff65779080b47ea78383531a393a22",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/asset-index.tsv",
+      "bytes": 763946,
+      "sha256": "8ab08d1081a040fbbf1d6cb02c9e50016b9cf5cc304f5c3502262dbb5176a6b5",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_model1356_lod3_20260916.dsar.tsv",
+      "bytes": 232146,
+      "sha256": "818ffda846ea9a05a8b350b29182b0a4477f9c21952567a74b455c76f0251e54",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "Licenses/DirectXTex-MIT.txt",
+      "bytes": 1162,
+      "sha256": "9906940f61b1f0b533fa7d99baf55178b2808fbe113ea51dfbfad8572ccd5f2b",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "AssetRecipes/local_zone_sdquarter_closed.dsar.tsv",
+      "bytes": 127632,
+      "sha256": "0a5abf8571d29c9697882cef7fb4021b3a49f634661fb6efc957f23ee4559c6a",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/local_distant_xyhalf.dsar.tsv",
+      "bytes": 2673,
+      "sha256": "9482a8c0de7f9eb5f2863ec9550f94be73552195db8cf50d4f985a908308ca54",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/runtime-toc.tsv",
+      "bytes": 763533,
+      "sha256": "533b2c6a574a30a5608ffc7ae28d8bbb7d8ef8eeebe006cf611d16de6d0af017",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "AssetRecipes/batch.tsv",
+      "bytes": 2170,
+      "sha256": "04005afaad3d732c6ab00322d442f996c4120f38c7315e8daf4363ee28b20610",
+      "category": "numeric-conversion-metadata"
+    },
+    {
+      "entry": "Licenses/K4os-LICENSE.txt",
+      "bytes": 1073,
+      "sha256": "ef5a021fc2ae3658f4ad8d2526c87fb2cf394285f47abfb784cf73a27ffd9522",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Licenses/LZ4-BSD.txt",
+      "bytes": 1311,
+      "sha256": "d15d99c8dc6b0ec22174c0e563a95bc40f9363ca7f9d9d793bb5c5a8e8d0af71",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "TextureConvert.dll",
+      "bytes": 195584,
+      "sha256": "683354207543dddde46e6346f04210fe90bb9f0426401776a37bde4b8cb513a0",
+      "category": "built-from-included-native-helper-and-DirectXTex-source"
+    },
+    {
+      "entry": "THIRD-PARTY-NOTICES.txt",
+      "bytes": 4024,
+      "sha256": "6b9c40c362e642db3a8ea44d9c48d476f5894f89fa16628bfc8454755d2b1796",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "Assets/Logo.png",
+      "bytes": 983,
+      "sha256": "f34c11a163f02c8491228e32e5c5a4e697658f58dc359ab39b5e8a52732cde07",
+      "category": "generated-geometric-artwork"
+    },
+    {
+      "entry": "Assets/SmallLogo.png",
+      "bytes": 292,
+      "sha256": "eced7d19de4b2b5466fa5598809307a4cb5dd17f6b6c3c40a24e334056b826b1",
+      "category": "generated-geometric-artwork"
+    },
+    {
+      "entry": "Assets/StoreLogo.png",
+      "bytes": 340,
+      "sha256": "29dae45aacc891c8fde02849ea089869f35c6e640c209c41a1bab7ebbd15f988",
+      "category": "generated-geometric-artwork"
+    },
+    {
+      "entry": "Assets/SplashScreen.png",
+      "bytes": 3198,
+      "sha256": "29ec8930c62eb2993ac3a8cdbb6e3e0dbe357b4695c2e1a645443d0ad6f042c8",
+      "category": "generated-geometric-artwork"
+    },
+    {
+      "entry": "resources.pri",
+      "bytes": 16240,
+      "sha256": "9881c5beaeb27209d97a37a9ea04f7b1b684d0a1255531796b0cfd71aab731ec",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "SpiderManInstaller.dll",
+      "bytes": 29959680,
+      "sha256": "f426496b48fd4aba19f909ae8efb7c1db47f8ab9a1f269396b813b5afe5b7933",
+      "category": "launcher-dotnet-native-output"
+    },
+    {
+      "entry": "SpiderManInstaller.exe",
+      "bytes": 18944,
+      "sha256": "e799f349a6a2057bf625fd3b9207cd2d9775c3e594c558f3442e6908b8142cb0",
+      "category": "launcher-dotnet-native-output"
+    },
+    {
+      "entry": "AppxManifest.xml",
+      "bytes": 4506,
+      "sha256": "d112bb43bdaf99c35f6b6ce324c82c00df3c0cea3ac864022c4e64871de6f476",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "AppxBlockMap.xml",
+      "bytes": 46386,
+      "sha256": "231a00073e473b23b95e89253fca15f0f75650a75487f5202650bc8684acfd5e",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "[Content_Types].xml",
+      "bytes": 965,
+      "sha256": "1a09078d0638da6a8e5787c79915052b9f075cbcc2c24839f85619c9c9306da2",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "AppxMetadata/CodeIntegrity.cat",
+      "bytes": 2424,
+      "sha256": "271cae0d74da553e034c645a8f326c37205df5e6b6c4612be074e861337791fc",
+      "category": "metadata-or-notice"
+    },
+    {
+      "entry": "AppxSignature.p7x",
+      "bytes": 1618,
+      "sha256": "646fd2bb8bc0b59adffe079cf1e79a0a7e037a1722ca428160bc97c07a7545a1",
+      "category": "metadata-or-notice"
+    }
+  ],
+  "framework_packages": [
+    {
+      "file": "Microsoft.NET.Native.Framework.2.2.appx",
+      "bytes": 5204216,
+      "sha256": "c195047f4af9c3ff3d92c40e55a901cf7cfa08a679b8ca2543bb104bab2f7ff1",
+      "origin": "SDK/MSBuild-selected framework dependency; inspect applicable Microsoft terms"
+    },
+    {
+      "file": "Microsoft.NET.Native.Runtime.2.2.appx",
+      "bytes": 244530,
+      "sha256": "27fae660d8c609e020703bb463b6601e62811dc75db19975bcb7d68d959b527d",
+      "origin": "SDK/MSBuild-selected framework dependency; inspect applicable Microsoft terms"
+    },
+    {
+      "file": "Microsoft.VCLibs.x64.14.00.appx",
+      "bytes": 896581,
+      "sha256": "9c17b521f9d690a1f504da5108ed6eec5669eb3a8fd1331eef43e40d84e74283",
+      "origin": "SDK/MSBuild-selected framework dependency; inspect applicable Microsoft terms"
+    }
+  ]
+}

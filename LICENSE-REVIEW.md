@@ -2,6 +2,8 @@
 
 This repository is private and has no downloadable binary release. License texts and source are provided for review; this is not a legal clearance statement.
 
+The October 10 [detailed evidence review](release/REDISTRIBUTION-REVIEW.md) records the DepotDownloader maintainer discussion, the differing SteamKit source/package notices, the exact runtime categories still unverified, and the new source/rebuild materials.
+
 ## Items that must be resolved before a binary release
 
 - **Asset converter integration.** The separate asset-preparation prototype adapts GPL-3.0 format tools. Its source is provided separately for review. Resolve compatibility with the launcher's DepotDownloader grant before distributing a combined binary; the local integration test does not settle that question. Microsoft DirectXTex and K4os license notices are included with the component.

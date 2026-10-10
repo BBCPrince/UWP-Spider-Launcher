@@ -23,7 +23,9 @@ Distribution of a combined binary is not yet approved; see LICENSE-REVIEW.md.
 SteamKit2 2.5.0
 https://github.com/SteamRE/SteamKit
 Commit 0c20a7d2aff9842815bf6b5aec657553e4186dd5
-LGPL-2.1-only. Full text and upstream notices are in licenses/SteamKit-LGPL.txt
+NuGet declares LGPL-2.1-only; the pinned source notice permits LGPL-2.1 or later.
+Both are retained as evidence; see release/REDISTRIBUTION-REVIEW.md.
+Full text and upstream notices are in licenses/SteamKit-LGPL.txt
 and licenses/SteamKit-Notices.txt. Referenced via NuGet; no library binary is
 included in the source repository. It is native-linked into private test builds.
 SteamMachineIdentity uses its extension API. The private build script accepts
