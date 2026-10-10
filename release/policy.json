@@ -1,0 +1,11 @@
+{
+  "public_binary_approved": false,
+  "required_reviews": {
+    "depotdownloader_gpl_version_compatibility": {"complete": false, "evidence": "Pinned upstream has GPL v2 text; no verified later-version grant or exception found."},
+    "native_linked_steamkit_rebuild": {"complete": true, "evidence": "Modified SteamKit 2.5.0 compiled and linked through .NET Native. Compiler input SHA256 f61775d67d7ceb47abd8541ac199f8aa84c8a3a7666b13889795bdc8f4bb8717 matched the rebuilt DLL."},
+    "matching_corresponding_source_bundle": {"complete": false, "evidence": "Launcher/converter source and pinned dependency source references are available. Complete matching source/rebuild distribution must accompany a future public binary."},
+    "framework_redistribution": {"complete": false, "evidence": "Check exact shipped framework/helper binaries and notices against the applicable Microsoft redistribution terms."},
+    "fresh_install_user_test": {"complete": false, "evidence": "User volunteered a fresh test; no result for 0.5.0.0 yet."},
+    "separate_runtime_distribution": {"complete": false, "evidence": "Runtime support is outside the launcher. Its permissions and corresponding-source obligations remain unresolved; moving it does not grant redistribution rights."}
+  }
+}

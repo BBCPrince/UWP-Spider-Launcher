@@ -37,3 +37,10 @@
 !asset-preparation/recipes/*.tsv
 !asset-preparation/licenses/
 !asset-preparation/licenses/*.txt
+!tools/
+!tools/*.py
+!tools/*.ps1
+!release/
+!release/*.json
+!release/*.md
+!tests/test_release_audit.py

@@ -1,5 +1,10 @@
 2026-10-09: Seven portable launcher suites compiled and passed on Windows using the Visual Studio 2022 C# compiler.
-136 PASS assertions.
+138 PASS assertions (including 20 preparation checks).
 Suites: ImportTests, LanguageTests, WifiTests, PreparationTests, CleanupTests, DownloadProgressTests, TransferDiagnosticsTests.
 Inputs are synthetic fixtures and file-name/hash catalogs; no game content or Xbox access was used.
 This does not test a final UWP release, validate full game preparation, or establish legal compliance.
+
+The asset converter adds 19 generator and 14 batch tests. The package audit has
+5 Python regression tests. All passed for the 0.5.0.0 private candidate.
+Windows .NET Native compilation also passed using a rebuilt, modified SteamKit
+library; this verifies the technical rebuild path, not license compliance.

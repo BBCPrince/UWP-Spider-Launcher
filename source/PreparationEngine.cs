@@ -88,7 +88,7 @@ namespace SpiderManInstaller
             Verify(partial,patch.ResultSize,patch.ResultHash,cancel);File.Move(partial,target);
         }
         public static void Run(string importRoot,string runtimeRoot,string payloadRoot,
-            IList<PreparationFile> files,ModulePatch patch,string recipeHash,Action<string> report,CancellationToken cancel)
+            IList<PreparationFile> files,ModulePatch patch,string recipeHash,Action<string> report,CancellationToken cancel,string generatedRoot=null)
         {
             cancel.ThrowIfCancellationRequested();
             importRoot=Path.GetFullPath(importRoot);runtimeRoot=Path.GetFullPath(runtimeRoot);
@@ -100,7 +100,8 @@ namespace SpiderManInstaller
             {
                 Full(runtimeRoot,row.Destination);Full(payloadRoot,row.Source);
                 if(!names.Add(ImportEngine.SafePath(row.Destination)) || row.Size<0 || row.Hash==null || row.Hash.Length!=64 || row.Hash.Any(c=>!Uri.IsHexDigit(c))) throw new IOException("Invalid preparation recipe");
-                if(row.Origin!="import" && row.Origin!="payload" && row.Origin!="derived")throw new IOException("Unknown preparation input");
+                if(row.Origin!="import" && row.Origin!="payload" && row.Origin!="derived" && row.Origin!="generated")throw new IOException("Unknown preparation input");
+                if(row.Origin=="generated") { if(generatedRoot==null)throw new IOException("Generated assets missing");Full(generatedRoot,row.Source); }
                 if(row.Origin=="import" && row.Source.StartsWith("asset_archive/",StringComparison.OrdinalIgnoreCase) && row.Source!=row.Destination) throw new IOException("Archive paths must match");
                 if(row.Origin=="derived" && (row.Size!=patch.ResultSize || row.Hash!=patch.ResultHash))throw new IOException("Module recipe identity mismatch");
             }
@@ -137,7 +138,7 @@ namespace SpiderManInstaller
                 bool overlay=row.Destination.StartsWith("asset_archive/",StringComparison.OrdinalIgnoreCase);
                 string target=Full(overlay?pending:stage,row.Destination);
                 if(row.Origin=="derived") Derive(Full(importRoot,row.Source),target,patch,cancel);
-                else Copy(Full(row.Origin=="import"?importRoot:payloadRoot,row.Source),target,row.Size,row.Hash,cancel);
+                else Copy(Full(row.Origin=="import"?importRoot:row.Origin=="generated"?generatedRoot:payloadRoot,row.Source),target,row.Size,row.Hash,cancel);
             }
             // All slow work is verified before this short, resumable commit.
             cancel.ThrowIfCancellationRequested();report?.Invoke("Finishing preparation—keeping game archives on D:");
@@ -145,7 +146,7 @@ namespace SpiderManInstaller
             string savedToc=Path.Combine(runtimeRoot,"original-asset-toc");
             string toc=Path.Combine(targetAssets,"toc");
             if(!File.Exists(savedToc))File.Move(toc,savedToc);
-            foreach(var row in files.Where(r=>r.Origin=="payload" && r.Destination.StartsWith("asset_archive/",StringComparison.OrdinalIgnoreCase)))
+            foreach(var row in files.Where(r=>(r.Origin=="payload"||r.Origin=="generated") && r.Destination.StartsWith("asset_archive/",StringComparison.OrdinalIgnoreCase)))
             {
                 string target=Full(stage,row.Destination),from=Full(pending,row.Destination);
                 if(File.Exists(target))Verify(target,row.Size,row.Hash,CancellationToken.None);

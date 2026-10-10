@@ -57,6 +57,16 @@ class PreparationTests
     Write(runtime,"preparation-source.txt",Encoding.UTF8.GetBytes(new string('a',64)+"\n"+import));Directory.CreateDirectory(Path.Combine(runtime,"StartupContent"));Directory.Move(Path.Combine(import,"asset_archive"),Path.Combine(runtime,"StartupContent/asset_archive"));
     LanguageImports.ApplyToPreparation(Path.Combine(runtime,"StartupContent/asset_archive"),rows,packs);Run();Assert(File.Exists(Path.Combine(runtime,"prepared-receipt.txt")),"resume failed");
   });
-  Console.WriteLine("18 preparation checks passed.");
+  Check("Generated assets commit from a separate verified source",()=>{
+    string generated=Path.Combine(root,"generated");Write(generated,"asset_archive/local_fix",new byte[]{4,5});Write(generated,"asset_archive/toc",new byte[]{8,8});
+    foreach(var r in rows.Where(r=>r.Destination.StartsWith("asset_archive/")&&r.Origin=="payload"))r.Origin="generated";
+    PreparationEngine.Run(import,runtime,payload,rows,patch,new string('a',64),null,CancellationToken.None,generated);
+    Assert(File.Exists(Path.Combine(runtime,"prepared-receipt.txt")),"generated preparation incomplete");Assert(File.ReadAllBytes(Path.Combine(runtime,"StartupContent/asset_archive/local_fix")).SequenceEqual(new byte[]{4,5}),"generated content differs");
+  });
+  Check("Bad generated assets reject before archive relocation",()=>{
+    string generated=Path.Combine(root,"generated");Write(generated,"asset_archive/local_fix",new byte[]{0,0});rows.Single(r=>r.Destination=="asset_archive/local_fix").Origin="generated";
+    Reject(()=>PreparationEngine.Run(import,runtime,payload,rows,patch,new string('a',64),null,CancellationToken.None,generated));Assert(Directory.Exists(Path.Combine(import,"asset_archive")),"original archives moved on generation failure");Assert(!File.Exists(Path.Combine(runtime,"prepared-receipt.txt")),"false readiness");
+  });
+  Console.WriteLine("20 preparation checks passed.");
  }
 }

@@ -1,6 +1,6 @@
 # Release audit — October 9, 2026
 
-The current MSIX is not a launcher-only package. No binary or game content is included in this repository.
+This historical audit describes version 0.3.5.1, which was not a launcher-only package. See release/STATUS.md for the current 0.5.0.0 candidate and unresolved release items. No binary or game content is included in this repository.
 
 ## Package examined
 

@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" IgnorableNamespaces="uap mp">
- <Identity Name="Local.SpiderManLauncher" Publisher="CN=SpiderMan Import Test" Version="0.3.5.1" />
+ <Identity Name="Local.SpiderManLauncher" Publisher="CN=SpiderMan Import Test" Version="0.5.0.0" />
  <mp:PhoneIdentity PhoneProductId="d4c00e2f-e093-48fc-84e6-f08878207b77" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
  <Properties><DisplayName>Spider-Man Launcher</DisplayName><PublisherDisplayName>Local Test</PublisherDisplayName><Logo>Assets\StoreLogo.png</Logo></Properties>
  <Dependencies><TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" /></Dependencies>
@@ -17,5 +17,3 @@
  </Applications>
  <Capabilities><Capability Name="internetClient" /><Capability Name="privateNetworkClientServer" /><uap:Capability Name="removableStorage" /></Capabilities>
 </Package>
-
-

@@ -1,0 +1,11 @@
+{
+  "project": "SteamKit2",
+  "version": "2.5.0",
+  "commit": "0c20a7d2aff9842815bf6b5aec657553e4186dd5",
+  "url": "https://codeload.github.com/SteamRE/SteamKit/zip/0c20a7d2aff9842815bf6b5aec657553e4186dd5",
+  "sha256": "ec4667597b9fbbdd089f01cb00115583ad3c93411ecc8ac8f10c183342d9d247",
+  "license": "LGPL-2.1-only",
+  "build": "dotnet build SteamKit2/SteamKit2/SteamKit2.csproj -c Release -f netstandard2.0 -p:TargetFrameworks=netstandard2.0",
+  "launcher_override": "tools/build-private.ps1 -SteamKitAssembly <absolute path to rebuilt SteamKit2.dll>",
+  "note": "Exact upstream source is available for a matching future source bundle. This metadata alone is not a completed corresponding-source distribution. Upstream strong-name signing material is not this launcher's package-signing key."
+}
