@@ -6,7 +6,7 @@ Candidate: 0.5.0.0, private testing only. Do not begin by deleting saves or rese
 
 The launcher does not install the native game runtime. The matching runtime must already be installed, with its private `PreparationSupport` folder beside `runtime-bootstrap.json`. A launcher-only ZIP is not a complete from-zero runtime installation. The public repository intentionally excludes that support payload and its patch data.
 
-This candidate has not yet been deployed to the owner's Xbox. Coordinate installation of the candidate and matching support before testing; do not assume that the currently installed launcher is 0.5.0.0.
+On October 10, 2026, launcher 0.5.0.0 was installed on the owner's Xbox, with all 59 separate preparation-support files verified by SHA-256. The existing prepared-game receipt was unchanged. A fresh import/prepare/play cycle with this version has not yet been confirmed.
 
 ## Record the result of each step
 

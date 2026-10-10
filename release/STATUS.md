@@ -9,6 +9,7 @@
 - The launcher MSIX no longer contains `PreparationPayload`, `ModulePatch.json`, `PreparationRecipe.json`, game archives, or game indexes. Package inspection uses an allowlist and checks required notices; the old 0.4.0.1 package fails that audit as intended.
 - License notices are included. Native helper and asset conversion source, pinned dependencies, synthetic tests, and private-build instructions are available in this repository.
 - Generated geometric app icons have a source script; no game artwork or font file is bundled by that script.
+- October 10: launcher 0.5.0.0 installed on the owner's Xbox. All 59 separate runtime preparation-support files matched local SHA-256 values, and the existing prepared-game receipt was unchanged. This is deployment verification, not a completed fresh-install test.
 - The package audit has regression tests for private binaries, omitted notices, unsafe names, duplicates, and payload-like recipe data. Passing packaging checks cannot override pending release reviews.
 
 ## Still blocked
