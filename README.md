@@ -65,6 +65,10 @@ USB import and on-console preparation have been exercised in earlier builds. The
 
 Binary distribution remains pending the checks in [project status](release/STATUS.md). Tests passing does not mean every dependency or the separate runtime is cleared for redistribution.
 
+## LINK FOR POST ON XBOX Player Voice TO HIGHER VRAM AND RAM LIMIT
+
+(https://feedbackportal.microsoft.com/feedback//idea/ca05d091-c7a6-f111-85cd-6045bd7e876e)
+
 ## License and attribution
 
 Component licenses and upstream notices are listed in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt). See [license status](LICENSE-REVIEW.md) for the remaining distribution work.
