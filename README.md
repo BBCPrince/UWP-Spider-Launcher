@@ -67,7 +67,7 @@ Binary distribution remains pending the checks in [project status](release/STATU
 
 ## LINK FOR POST ON XBOX Player Voice TO HIGHER VRAM AND RAM LIMIT
 
-(https://feedbackportal.microsoft.com/feedback//idea/ca05d091-c7a6-f111-85cd-6045bd7e876e)
+https://feedbackportal.microsoft.com/feedback/idea/ca05d091-c7a6-f111-85cd-6045bd7e876e
 
 ## License and attribution
 
