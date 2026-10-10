@@ -26,3 +26,14 @@
 !tests/
 !tests/*.cs
 !tests/run-tests.ps1
+!asset-preparation/
+!asset-preparation/*.cs
+!asset-preparation/*.cpp
+!asset-preparation/*.vcxproj
+!asset-preparation/*.ps1
+!asset-preparation/*.md
+!asset-preparation/*.txt
+!asset-preparation/recipes/
+!asset-preparation/recipes/*.tsv
+!asset-preparation/licenses/
+!asset-preparation/licenses/*.txt

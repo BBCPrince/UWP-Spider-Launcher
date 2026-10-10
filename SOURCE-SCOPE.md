@@ -6,7 +6,7 @@ Excluded: game assets, modified archives and indexes, executable patch bytes, ga
 
 **This is a source review snapshot, not a complete installable release.** Preparation still refers to files deliberately excluded from redistribution. The project has an explicit build guard so it cannot accidentally produce an incomplete or misleading release package. The existing local and Xbox builds remain unchanged.
 
-The owner has not yet chosen between a transfer/download-only first release and waiting for a full preparation implementation that derives required content from each user's own copy. No functionality has been silently removed from the working build.
+The owner chose preparation on the Xbox from each user's own files. The separate `asset-preparation` prototype contains conversion source, numeric recipes, hashes, and synthetic tests. It contains no converted textures, model payloads, or game indexes. Its GPL-3.0 license is separate from the launcher dependency review. The working build has not been replaced.
 
 ## Check the portable launcher components
 
