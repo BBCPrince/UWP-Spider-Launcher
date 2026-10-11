@@ -1,6 +1,10 @@
 # Project status
 
-**0.6.0.1 — experimental source preview. No public installer.**
+**0.6.0.12 — experimental launcher package in the private repository.**
+
+This update includes Play-triggered runtime setup repair, matching-receipt validation, a manual repair button, and startup-setting restoration for the separately installed runtime. A full runtime uninstall still requires external registration through Device Portal or Xbox deployment tools. Private runtime binaries, pipeline recipes and compiled game caches are excluded.
+
+The 0.6.0.12 Release x64 build is a packaging update of the console-tested 0.6.0.11 repair changes, with corrected status-text encoding. It is not a new end-to-end console validation. The repository visibility is unchanged.
 
 ## Implemented and checked
 

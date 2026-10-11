@@ -95,6 +95,8 @@
      <ComboBox x:Name="DownloadWorkers" SelectedIndex="1" SelectionChanged="Workers_Changed" Width="260" HorizontalAlignment="Left" FontSize="14" AutomationProperties.Name="Download workers"><ComboBoxItem Content="2 workers — conservative"/><ComboBoxItem Content="4 workers — default"/><ComboBoxItem Content="8 workers — faster network"/></ComboBox>
      <TextBlock Text="Applies to the next download. Actual speed depends on Steam, your network and Xbox storage." Style="{StaticResource Note}"/>
      <TextBlock Text="Stopping a download keeps partial files. Sign in again to verify and resume them." Style="{StaticResource Note}"/>
+     <TextBlock Text="Deleted the game app? Close the game, then restore its registration and missing startup settings. Requires the separate runtime files already on this Xbox." Style="{StaticResource Note}"/>
+     <Button Content="Install/repair game app" Click="RepairRuntime_Click" HorizontalAlignment="Left"/>
     </StackPanel></Border>
    </PivotItem>
   </Pivot>

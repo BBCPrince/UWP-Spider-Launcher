@@ -48,6 +48,16 @@ Do not run imports or preparation in two launcher installations at the same time
 
 ## Storage and troubleshooting
 
+### Reinstalling a deleted game app
+
+Press **Play**. The launcher detects missing or incomplete game-app setup. For an already registered compatible runtime, it restores missing startup settings and launches after setup confirms success. **Settings / Install/repair game app** remains available for repair without launching.
+
+**Full uninstall limitation:** deleting the game app also removes Xbox's Dev Home registration. The current launcher cannot recreate that registration on its own: ordinary UWP registration only restored the app-user entry, and the app could not connect to the console's own Device Portal. Register the separate runtime through Device Portal or the Windows Xbox deployment tools once, then press Play. Existing prepared game files do not need to be transferred again. This is not yet a fully automatic reinstall after deleting the runtime app.
+
+This action keeps existing settings and saves. It does not restore deleted saves, learned pipeline history, or compiled pipeline caches. It cannot recover missing runtime files: those still require the compatible separate runtime setup, which is not distributed in this repository. Imported and prepared game files are separate from the app registration and do not need another transfer if they remain intact.
+
+For a fresh pipeline-cache test, preserve the supplied recipes, verify that the generated compiled cache is empty, and compare startup preparation with a second launch. A recipe being present does not prove its pipeline was prepared successfully, and a startup test does not establish coverage of every scene in the game.
+
 Use **Storage → Remove game files** to review removal of the prepared game. This operation is designed to keep saves, the runtime app, and original import files. Always read the confirmation before proceeding.
 
 For an issue report, include launcher version, import method, supported game build, and the exact error message. Do not upload game files, saves, account details, sign-in QR codes, tokens, or signing keys.

@@ -6,9 +6,9 @@
 
 An unofficial UWP launcher for Xbox Developer Mode, with USB folder import, local Wi-Fi transfer, and Steam downloads through SteamKit.
 
-> **Experimental • 0.6.0.1**
+> **Experimental • 0.6.0.12**
 >
-> Source preview. No public installer is available yet. Playing requires a compatible, separately installed game runtime, which is **not included** in this repository.
+> The experimental launcher package is available in [Releases](https://github.com/BBCPrince/UWP-Spider-Launcher/releases). Playing requires a compatible, separately installed game runtime, which is **not included** in this repository.
 
 [Getting started](docs/GETTING-STARTED.md) · [Build from source](release/REBUILD-FROM-SOURCE.md) · [Project status](release/STATUS.md) · [Licenses & notices](THIRD-PARTY-NOTICES.txt)
 
@@ -63,7 +63,7 @@ The app uses C#/XAML and the UWP .NET Native toolchain. Preparation uses shared 
 
 USB import and on-console preparation have been exercised in earlier builds. The direct SteamKit candidate has passed local transfer checks, and the owner reports that Steam works on Xbox. A complete fresh download, interruption/resume, preparation, and play-through verification for this candidate is still pending.
 
-Binary distribution remains pending the checks in [project status](release/STATUS.md). Tests passing does not mean every dependency or the separate runtime is cleared for redistribution.
+The experimental package does not include private runtime files, game shader recipes, or compiled game caches. Broader distribution review remains pending the checks in [project status](release/STATUS.md). Tests passing does not mean every dependency or the separate runtime is cleared for redistribution.
 
 ## LINK FOR POST ON XBOX Player Voice TO HIGHER VRAM AND RAM LIMIT
 

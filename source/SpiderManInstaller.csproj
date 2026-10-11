@@ -20,6 +20,7 @@
   <Content Include="..\asset-preparation\bin\uwp\TextureConvert.dll"><Link>TextureConvert.dll</Link></Content><Compile Include="PreparationEngine.cs" /><Compile Include="GamePreparation.cs" /><Compile Include="GameContentCleanup.cs" />
   <Content Include="..\licenses\*.txt"><Link>Licenses\%(Filename)%(Extension)</Link></Content>
   <Content Include="..\THIRD-PARTY-NOTICES.txt"><Link>THIRD-PARTY-NOTICES.txt</Link></Content>
+  <Compile Include="RuntimeInstallation.cs" /><Compile Include="RuntimeRepairState.cs" />
   <Compile Include="App.xaml.cs"><DependentUpon>App.xaml</DependentUpon></Compile><Compile Include="MainPage.xaml.cs"><DependentUpon>MainPage.xaml</DependentUpon></Compile>
   <Compile Include="LanguageImports.cs" /><Content Include="LanguagePacks.json" /><Compile Include="ImportEngine.cs" /><Compile Include="FolderImportEngine.cs" /><Compile Include="UsbFolderSource.cs" /><Compile Include="FolderProbe.cs" /><Compile Include="StorageProbe.cs" /><Compile Include="GameStorage.cs" /><Compile Include="FolderChecks.cs" /><Compile Include="SteamProbe.cs" /><Compile Include="SteamMachineIdentity.cs" /><Compile Include="SteamDownload.cs" /><Compile Include="SteamChecks.cs" /><Compile Include="SteamTransfer\*.cs" /><Compile Include="WifiReceiver.cs" /><Compile Include="WifiFolderTransfer.cs" /><Compile Include="WifiProtocol.cs" /><Content Include="WifiTransfer.html" /><Compile Include="Properties\AssemblyInfo.cs" />
   <AppxManifest Include="Package.appxmanifest"><SubType>Designer</SubType></AppxManifest>

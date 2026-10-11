@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
- xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" IgnorableNamespaces="uap mp">
- <Identity Name="Local.SpiderManLauncherSteamKitTest" Publisher="CN=SpiderMan Import Test" Version="0.6.0.1" />
+ xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap mp rescap">
+ <Identity Name="Local.SpiderManLauncherSteamKitTest" Publisher="CN=SpiderMan Import Test" Version="0.6.0.12" />
  <mp:PhoneIdentity PhoneProductId="d4c00e2f-e093-48fc-84e6-f08878207b77" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
  <Properties><DisplayName>UWP Spider Launcher</DisplayName><PublisherDisplayName>Local Test</PublisherDisplayName><Logo>Assets\StoreLogo.png</Logo></Properties>
  <Dependencies><TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26100.0" /></Dependencies>
@@ -12,8 +12,8 @@
    <uap:VisualElements DisplayName="UWP Spider Launcher" Description="Unofficial launcher to import, prepare and play your own supported Steam game" BackgroundColor="#111827" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo.png">
     <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#111827" />
    </uap:VisualElements>
-   <Extensions><uap:Extension Category="windows.fileTypeAssociation"><uap:FileTypeAssociation Name="spidermanimport"><uap:SupportedFileTypes><uap:FileType>.zip</uap:FileType></uap:SupportedFileTypes></uap:FileTypeAssociation></uap:Extension></Extensions>
+   <Extensions><uap:Extension Category="windows.protocol"><uap:Protocol Name="uwp-spider-launcher" /></uap:Extension><uap:Extension Category="windows.fileTypeAssociation"><uap:FileTypeAssociation Name="spidermanimport"><uap:SupportedFileTypes><uap:FileType>.zip</uap:FileType></uap:SupportedFileTypes></uap:FileTypeAssociation></uap:Extension></Extensions>
   </Application>
  </Applications>
- <Capabilities><Capability Name="internetClient" /><Capability Name="privateNetworkClientServer" /><uap:Capability Name="removableStorage" /></Capabilities>
+ <Capabilities><Capability Name="internetClient" /><Capability Name="privateNetworkClientServer" /><uap:Capability Name="removableStorage" /><rescap:Capability Name="packageManagement" /></Capabilities>
 </Package>

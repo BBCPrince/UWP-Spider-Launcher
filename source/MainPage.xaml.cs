@@ -23,6 +23,8 @@ namespace SpiderManInstaller
         CancellationTokenSource cancellation;
         WifiReceiver receiver;
         bool busy;
+        readonly DispatcherTimer repairTimer=new DispatcherTimer{Interval=TimeSpan.FromSeconds(2)};
+        bool checkingRepair;
         DateTime lastUpdate;
         int qrGeneration;
         int wifiGeneration;
@@ -34,6 +36,8 @@ namespace SpiderManInstaller
         public MainPage()
         {
             InitializeComponent();
+            repairTimer.Tick+=(s,e)=>ShowRuntimeSetupResult();
+            Unloaded+=(s,e)=>repairTimer.Stop();
             object savedWorkers;
             if(ApplicationData.Current.LocalSettings.Values.TryGetValue("download-workers",out savedWorkers))
                 DownloadWorkers.SelectedIndex=Convert.ToInt32(savedWorkers)==2?0:Convert.ToInt32(savedWorkers)==8?2:1;
@@ -42,10 +46,17 @@ namespace SpiderManInstaller
             {
                 RefreshStorage();
                 RefreshPreparation();
+                ShowRuntimeSetupResult();
                 (PlayButton.IsEnabled?PlayButton:SteamTile).Focus(FocusState.Programmatic);
                 // Explicit one-shot requests used only for deployment verification.
                 try
                 {
+                    string repair=Path.Combine(ApplicationData.Current.LocalFolder.Path,"runtime-repair.request");
+                    if(File.Exists(repair))
+                    {
+                        string action=File.ReadAllText(repair).Trim();File.Delete(repair);
+                        if(action=="install")await RepairRuntime();
+                    }
                     string request=Path.Combine(GameStorage.OpenRoot(),"prepare.request");
                     if(File.Exists(request))
                     {
@@ -157,13 +168,33 @@ namespace SpiderManInstaller
                 foreach(string p in imports)ImportList.Items.Add(Path.GetFileName(p));
                 ImportList.SelectedIndex=imports.Count>0?0:-1;
                 bool ready=GamePreparation.Ready();PlayButton.IsEnabled=ready;PrepareButton.IsEnabled=!ready;
+                PlayButton.Content="▶  Play";
                 PrepareCard.Visibility=ready?Visibility.Collapsed:Visibility.Visible;
                 PreparationStatus.Text=ready?"Game files prepared. Ready to launch.":"Import your game from the Install tab, then choose Prepare below.";
                 if(File.Exists(Path.Combine(GamePreparation.RuntimeRoot,"deletion-pending.txt")))
-                {PreparationStatus.Text="Game removal is incomplete. Open Storage to finish cleanup.";PrepareButton.IsEnabled=false;}
+                {PreparationStatus.Text="Game removal is incomplete. Open Storage to finish cleanup.";PrepareButton.IsEnabled=false;PlayButton.IsEnabled=false;}
             }
             catch(Exception ex){PlayButton.IsEnabled=false;PreparationStatus.Text="Game readiness: "+ex.Message;}
         }
+        internal async void ShowRuntimeSetupResult()
+        {
+            if(busy || checkingRepair)return;
+            checkingRepair=true;
+            try
+            {
+                var result=RuntimeInstallation.ReadResult();
+                if(result==null){repairTimer.Stop();return;}
+                if(result.Status=="pending")repairTimer.Start();else repairTimer.Stop();
+                RefreshPreparation();
+                PlayButton.IsEnabled=result.Status!="pending" && GamePreparation.Ready();
+                Status.Text=PreparationStatus.Text=result.Message;
+                File.WriteAllText(Path.Combine(ApplicationData.Current.LocalFolder.Path,"runtime-repair-result.txt"),DateTime.UtcNow.ToString("o")+"\n"+result.Message);
+                if(result.Status=="ok" && result.Play)await PlayGame(false);
+            }
+            catch(Exception ex){Status.Text="Runtime setup: "+ex.Message;}
+            finally{checkingRepair=false;}
+        }
+        async void RepairRuntime_Click(object sender,RoutedEventArgs e){await RepairRuntime();}
         void Refresh_Click(object sender,RoutedEventArgs e){RefreshPreparation();}
         void RefreshStorage()
         {
@@ -232,18 +263,51 @@ namespace SpiderManInstaller
             try{File.WriteAllText(Path.Combine(GameStorage.OpenRoot(),"preparation-status.txt"),DateTime.UtcNow.ToString("o")+"\n"+outcome);}catch{}
         }
         async void Play_Click(object sender,RoutedEventArgs e){await PlayGame();}
-        async Task PlayGame()
+        async Task RepairRuntime(bool playAfter=false)
         {
             if(busy || (receiver!=null && receiver.Uploading))return;
+            busy=true;StopWifi();PlayButton.IsEnabled=false;PrepareButton.IsEnabled=false;
+            Progress.IsIndeterminate=true;
+            string outcome;
+            try
+            {
+                PreparationStatus.Text=Status.Text="Verifying and installing the game app…";
+                await RuntimeInstallation.Repair(playAfter);
+                outcome=playAfter?"Repairing the game app. It will launch automatically when startup settings are ready.":"Restoring missing startup settings...";
+                repairTimer.Start();
+            }
+            catch(Exception ex){outcome="Game app installation stopped (0x"+ex.HResult.ToString("X8")+"): "+ex.Message;}
+            finally{busy=false;Progress.IsIndeterminate=false;}
+            File.WriteAllText(Path.Combine(ApplicationData.Current.LocalFolder.Path,"runtime-repair-result.txt"),DateTime.UtcNow.ToString("o")+"\n"+outcome);
+            RefreshPreparation();Status.Text=outcome;ShowRuntimeSetupResult();
+        }
+        async Task PlayGame(bool allowRepair=true)
+        {
+            if(busy || (receiver!=null && receiver.Uploading))return;
+            bool repair=false;
+            busy=true;PlayButton.IsEnabled=false;PrepareButton.IsEnabled=false;
             try
             {
                 StopWifi();
-                File.WriteAllText(Path.Combine(GameStorage.OpenRoot(),"launch-status.txt"),DateTime.UtcNow.ToString("o")+"\nRequesting installed runtime through spiderman-runtime:play");
-                bool started=await GamePreparation.Play();
-                PreparationStatus.Text=started?"Game launch requested.":"Xbox could not open the runtime. Check that Spider-Man Runtime is installed.";
+                if(!GamePreparation.Ready())throw new IOException("Import and prepare your game files first. Repair can restore the game app, but cannot replace missing game content.");
+                PreparationStatus.Text="Checking the game app...";
+                if(allowRepair && await RuntimeInstallation.NeedsRepair())repair=true;
+                else
+                {
+                    bool started=await GamePreparation.Play();
+                    if(!started && allowRepair)repair=true;
+                    else PreparationStatus.Text=started?"Game launch requested.":"Setup completed, but Xbox could not open the game. Retry Play or check Dev Home. Your game files are preserved.";
+                }
+                if(repair)PreparationStatus.Text="Game app missing or incomplete. Starting automatic repair...";
                 File.WriteAllText(Path.Combine(GameStorage.OpenRoot(),"launch-status.txt"),DateTime.UtcNow.ToString("o")+"\n"+PreparationStatus.Text);
             }
             catch(Exception ex){PreparationStatus.Text="Launch: "+ex.Message;}
+            finally
+            {
+                busy=false;
+                string outcome=PreparationStatus.Text;RefreshPreparation();Status.Text=PreparationStatus.Text=outcome;
+            }
+            if(repair)await RepairRuntime(true);
         }
         async Task<List<ExpectedFile>> LoadExpected()
         {
