@@ -1,0 +1,2 @@
+# Keep hash-pinned pipeline metadata byte-identical on Windows checkouts.
+asset-preparation/pipelines/pipeline-map.tsv -text

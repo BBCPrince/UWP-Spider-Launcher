@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UWP Spider Launcher — Wi-Fi transfer</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;background:#10131b;color:#eef1f7}*{box-sizing:border-box}body{max-width:760px;margin:40px auto;padding:20px}header{display:flex;align-items:center;gap:12px;margin-bottom:24px}.badge{background:#d62e4b;padding:12px;border-radius:8px;font-weight:bold}.eyebrow{font-size:12px;color:#aeb8ca;letter-spacing:2px}h1{font-size:28px;margin:4px 0}h2{font-size:20px;margin:0 0 12px}.card{background:#1c2230;border:1px solid #30394b;padding:22px;border-radius:12px;margin:16px 0}p{line-height:1.5;color:#bac4d5}label{display:block;margin:12px 0 7px}input,button{font:inherit;border-radius:7px;padding:11px;border:1px solid #4b576e}input{max-width:100%;background:#101622}#code{width:160px;letter-spacing:4px;font-size:22px}button{background:#d62e4b;color:white;cursor:pointer}button:disabled{opacity:.5;cursor:default}.secondary{background:#30394b}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}progress{width:100%;height:15px;accent-color:#f04765}#status{white-space:pre-wrap;overflow-wrap:anywhere;color:#e1e8f5}#detail{font-size:14px}summary{cursor:pointer;color:#bec9dc}small{color:#a6b5c9}
+</style></head><body>
+<header><span class="badge">US</span><div><div class="eyebrow">UWP SPIDER LAUNCHER</div><h1>Send game files to Xbox</h1></div></header>
+<section class="card"><h2>1. Connect</h2><label for="code">Pairing code shown on your Xbox</label><input id="code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="000000"><p>Keep the launcher open. Your PC and Xbox must be on the same local network.</p></section>
+<section class="card"><h2>2. Choose your game folder</h2><p>Select the supported Steam folder containing <strong>Spider-Man.exe</strong> and <strong>asset_archive</strong>. Files go straight into Xbox game storage. No ZIP or extra extracted copy is needed.</p>
+<label for="folder">Game folder</label><input id="folder" type="file" webkitdirectory multiple><p id="selection">No folder selected.</p>
+<div class="actions"><button id="send">Send folder to Xbox</button><button id="cancel" class="secondary" disabled>Stop sending</button></div>
+<p><small>Use a current desktop Edge or Chrome browser. All supported voice packs in your folder are included. Unneeded files are left on your PC.</small></p></section>
+<section class="card" aria-label="Transfer progress"><progress id="progress" max="100" value="0"></progress><p id="status" role="status" aria-live="polite">Ready to connect.</p><p id="detail"></p><small>If the connection drops, leave the receiver open, select the same folder and send again. Completed, verified files are reused during this receiver session.</small></section>
+<details class="card"><summary>Already have a ZIP?</summary><p>ZIP transfer is still available, but needs space for the ZIP and extracted game.</p><label for="zip">Game ZIP</label><input id="zip" type="file" accept=".zip"><div class="actions"><button id="sendZip" class="secondary">Send ZIP</button></div></details>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const fromQr=location.hash.slice(1);if(/^\d{6}$/.test(fromQr))$('code').value=fromQr;
+if(location.hash)history.replaceState(null,'',location.pathname);
+let current=null,stopped=false,running=false,inventory=[],lookup=new Map();
+const gib=n=>(n/1073741824).toFixed(2)+' GiB';
+function state(active){running=active;for(const id of ['send','sendZip','folder','zip','code'])$(id).disabled=active;$('cancel').disabled=!active;}
+function pairing(){if(!/^\d{6}$/.test($('code').value.trim()))throw Error('Enter the six-digit pairing code shown on Xbox.');return $('code').value.trim();}
+function request(method,path,body,onProgress){return new Promise((resolve,reject)=>{
+ if(stopped){reject(Error('Sending stopped.'));return;}
+ const xhr=new XMLHttpRequest();current=xhr;xhr.open(method,path);xhr.setRequestHeader('X-Transfer-Code',pairing());
+ if(typeof body==='string')xhr.setRequestHeader('Content-Type','application/json');
+ if(onProgress)xhr.upload.onprogress=e=>{if(e.lengthComputable)onProgress(e.loaded);};
+ xhr.onload=()=>{current=null;if(xhr.status>=200&&xhr.status<300)resolve(xhr.responseText);else{let e=Error(xhr.responseText||'Xbox rejected the request.');e.status=xhr.status;reject(e);}};
+ xhr.onerror=()=>{current=null;reject(Error('Connection interrupted. Keep Xbox receiver open and send the same folder again.'));};
+ xhr.onabort=()=>{current=null;reject(Error('Sending stopped. Verified files can be reused while this receiver stays open.'));};xhr.send(body);
+});}
+$('folder').onchange=()=>{
+ inventory=[];lookup=new Map();
+ try{for(const file of $('folder').files){const relative=file.webkitRelativePath;const slash=relative.indexOf('/');if(slash<0)throw Error('Choose the game folder using a desktop Edge or Chrome browser.');const path=relative.slice(slash+1);const key=path.toLowerCase();if(lookup.has(key))throw Error('Duplicate file names in folder.');lookup.set(key,file);inventory.push({path,size:file.size});}
+ $('selection').textContent=inventory.length+' files selected. The Xbox will choose and verify the required files.';
+ }catch(e){inventory=[];lookup.clear();$('selection').textContent=e.message;}
+};
+function meter(done,total,start,baseline,name){const elapsed=Math.max(.1,(performance.now()-start)/1000);const speed=Math.max(0,done-baseline)/elapsed;$('progress').value=total?100*done/total:0;$('status').textContent=name;$('detail').textContent=gib(done)+' / '+gib(total)+' · '+(speed/1000000).toFixed(1)+' MB/s · '+$('progress').value.toFixed(1)+'%';}
+$('send').onclick=async()=>{
+ if(running)return;
+ try{pairing();if(!inventory.length)throw Error('Choose your Steam game folder first.');if(inventory.length>20000)throw Error('Choose just the game folder, not the whole Steam library.');stopped=false;state(true);$('status').textContent='Checking file list and storage…';
+ const plan=JSON.parse(await request('POST','/folder',JSON.stringify(inventory)));let done=plan.done;const baseline=done,start=performance.now();meter(done,plan.total,start,baseline,'Checking the game version…');
+ for(let i=0;i<plan.files.length;i++){const row=plan.files[i];if(row.done)continue;const file=lookup.get(row.path.toLowerCase());if(!file||file.size!==row.size)throw Error('Folder changed. Select it again.');
+ await request('PUT','/file/'+i,file,n=>meter(done+n,plan.total,start,baseline,'Sending '+row.path));done+=row.size;meter(done,plan.total,start,baseline,'Verified '+row.path);}
+ $('status').textContent='Folder received and verified. Choose Prepare game on your Xbox, then Play.';$('progress').value=100;
+ }catch(e){$('status').textContent=e.message;}finally{state(false);}
+};
+$('sendZip').onclick=async()=>{if(running)return;try{pairing();const file=$('zip').files[0];if(!file)throw Error('Choose a ZIP first.');stopped=false;state(true);const start=performance.now();$('status').textContent='Sending ZIP…';const result=await request('PUT','/game.zip',file,n=>meter(n,file.size,start,0,'Sending ZIP…'));$('status').textContent=result;$('progress').value=100;}catch(e){$('status').textContent=e.message;}finally{state(false);}};
+$('cancel').onclick=()=>{stopped=true;if(current)current.abort();};
+window.addEventListener('beforeunload',event=>{if(running){event.preventDefault();event.returnValue='';}});
+</script></body></html>

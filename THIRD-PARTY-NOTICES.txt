@@ -1,0 +1,80 @@
+UWP Spider Launcher - third-party notices
+
+The source repository contains launcher/converter source, numeric recipes,
+notices and necessary build materials. It contains no game executable/assets,
+game shader bytecode, generated shader recipes, caches, private runtime binaries,
+user saves or signing keys. Optional tests and internal review tools are separate.
+These source exclusions do not approve arbitrary externally supplied combined
+runtime binaries or the private 0.6.0.39 installer, which contained embedded game
+shaders. No public combined installer is supplied by this source candidate.
+
+Owned compression shader converter
+OwnedShaderConvert.cpp and OwnedCompressionPreparation.cs are GPL-3.0-only.
+They read and transform verified owner-supplied programs; no game program is
+embedded. DxbcConverter.h is from microsoft/DirectXShaderCompiler commit
+78d896efe7640f9a817e30fb10c490520ed62611 under its University of Illinois notice.
+Its include path is adapted to the Windows SDK header. Upstream license and
+third-party notices: licenses/DirectXShaderCompiler.txt. Compiler DLLs and the
+OS converter are not supplied in this source tree. Redistribution of a future
+compiler bundle requires review; the source header license alone is not that
+approval. See release/SOURCE-INPUTS.json and release/STATUS.md.
+
+Launcher Steam transfer implementation (2026-10-10)
+The downloader in source/SteamTransfer and SteamDownload.cs uses the public
+SteamKit API directly.
+It is not an adaptation of DepotDownloader. These new files are licensed
+GPL-3.0-or-later; full text: licenses/Launcher-GPL-3.0.txt.
+DepotDownloader sources and compiled components are absent from this candidate.
+Historical revisions may have different dependencies and terms. These notices
+describe the current source snapshot and do not relicense earlier files.
+
+SteamKit2 2.5.0
+https://github.com/SteamRE/SteamKit
+Commit 0c20a7d2aff9842815bf6b5aec657553e4186dd5
+NuGet declares LGPL-2.1-only; the pinned source notice permits LGPL-2.1 or later.
+Both notices are retained; see licenses/SteamKit-LGPL.txt and licenses/SteamKit-Notices.txt.
+Full text and upstream notices are in licenses/SteamKit-LGPL.txt
+and licenses/SteamKit-Notices.txt. Referenced via NuGet; no library binary is
+included in the source repository. It is native-linked into private test builds.
+SteamMachineIdentity uses its extension API. The private build script accepts
+a rebuilt SteamKit2.dll, and this path was validated with a modified library.
+Any public native-linked distribution still needs its matching corresponding
+source/rebuild bundle; see release/STEAMKIT-SOURCE.json and release/STATUS.md.
+
+QRCoder 1.4.3
+https://github.com/codebude/QRCoder
+MIT. Copyright notice and license: licenses/QRCoder-MIT.txt.
+QR encoding is local. Referenced via NuGet; no library binary is included in
+the source repository. Private compiled packages include its compiled code.
+
+Owned-file asset converter
+GPL-3.0-only, adapted from the documented asset-format tools. Source, provenance,
+and build instructions are in asset-preparation. Full license:
+licenses/AssetConverter-GPL-3.0.txt. Recipes contain metadata, not asset bytes.
+The combined converter/launcher retains the converter's GPL-3.0 requirements.
+
+TextureConvert / DirectXTex / K4os.Compression.LZ4
+The CPU texture helper's source is in asset-preparation/TextureConvert.cpp (MIT).
+DirectXTex is pinned to 4feb3e11a020f35b796fc769a74216a555d4f5ef, Microsoft MIT.
+K4os.Compression.LZ4 1.3.8 is MIT, with underlying LZ4 BSD notice retained.
+See licenses/DirectXTex-MIT.txt, K4os-LICENSE.txt and LZ4-BSD.txt.
+
+protobuf-net and protobuf-net.Core 3.2.26
+https://github.com/protobuf-net/protobuf-net
+Commit 9618de94145145228e115e8f134f132522e51f88
+Apache-2.0. Upstream attribution: licenses/protobuf-net.txt.
+Complete license: licenses/Apache-2.0.txt. Transitive SteamKit dependencies.
+This dependency remains subject to its Apache-2.0 notices and conditions.
+
+Microsoft framework, SDK and runtime packages
+Their own licensing terms apply. The complete resolved package/version
+inventory and the available NuGet license metadata are in DEPENDENCIES.json.
+No SDK/framework binaries are in the source repository. Private compiled
+packages include compiler-selected runtime components; Microsoft UWP terms and
+third-party notices are included in licenses/Microsoft-UWP*.txt. These files
+are not a grant to redistribute arbitrary Windows system DLLs.
+
+Names of games, platforms, and services identify compatibility targets only.
+This is an unofficial project, not endorsed by Sony, Marvel, Insomniac Games,
+Valve, or Microsoft. An ownership requirement and this notice do not constitute
+legal clearance for a port, runtime, patch, or distribution.

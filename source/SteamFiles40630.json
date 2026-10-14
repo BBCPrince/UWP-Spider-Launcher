@@ -1,0 +1,292 @@
+[
+  {
+    "path": "D3D12/D3D12Core.dll",
+    "size": 5247408,
+    "sha256": "08b07b09a7f5d4b49ba4b6bd7675abdefe970032ca1779dc7a37b976c61387b0"
+  },
+  {
+    "path": "GFSDK_SSAO_D3D11.win64.dll",
+    "size": 1570304,
+    "sha256": "44f2edd66143ad988dbb95cc3c092916991be59cbfbe89bb6afdf293dd6dcaa3"
+  },
+  {
+    "path": "Spider-Man.exe",
+    "size": 121901008,
+    "sha256": "e297d4d94f1ffe4febf289745e79e7b6fa233a788e7a00f480fc77c55db81ad1"
+  },
+  {
+    "path": "XAudio2_7.dll",
+    "size": 518488,
+    "sha256": "f8636ccc37bbfc84107992b60e4226eb7237417112267ed64b08f72983ac4314"
+  },
+  {
+    "path": "amd_ags_x64.dll",
+    "size": 166912,
+    "sha256": "311328f5e06202b83880b6f4917dddca9fc2157c960933d17857a119d7c8169f"
+  },
+  {
+    "path": "amd_fidelityfx_dx12.dll",
+    "size": 6675664,
+    "sha256": "12a5081257ec95b0b53ad51b4a87fb3c03f97fe0bbb59f9496968f8d50ef93a6"
+  },
+  {
+    "path": "asset_archive/a00s034.us",
+    "size": 1221464064,
+    "sha256": "087db484ef13adbac05995ebb4b8910973942800b67c2fadf7d0a3c7e9536539"
+  },
+  {
+    "path": "asset_archive/dag",
+    "size": 15616803,
+    "sha256": "36772cc443bcdeb3cb3f6b65cb6e69ed64a4be90760f6106ff3c0c36ccee1cb8"
+  },
+  {
+    "path": "asset_archive/g00s000",
+    "size": 2124037740,
+    "sha256": "5c7209058c2981685cc31803588f839497d00519946c582b729fb6d45878d2e6"
+  },
+  {
+    "path": "asset_archive/g00s001",
+    "size": 2067995561,
+    "sha256": "c9e9b131c891ba86838751c2ce264836ced447f4f1c8f7fac70807dc8dc73dda"
+  },
+  {
+    "path": "asset_archive/g00s002",
+    "size": 2139786450,
+    "sha256": "413a3c8809f381f46f1db4321c42222ddb72fa6a1b3aab55e3266f330b376596"
+  },
+  {
+    "path": "asset_archive/g00s003",
+    "size": 2206867748,
+    "sha256": "97a84e6a7aaa9b927e658eb489c5d0dbccb1f608ba2a0bc853ca349502da59e9"
+  },
+  {
+    "path": "asset_archive/g00s004",
+    "size": 2185402199,
+    "sha256": "fb6900216bfaeb9fdaedd495c8c423aff5b672b54d534881cc4b46c5563bde15"
+  },
+  {
+    "path": "asset_archive/g00s005",
+    "size": 2203306684,
+    "sha256": "d76c438ee837139b07be4ba8371d1ebd4c083ae8b4048c4de0d8cb977f6e8da0"
+  },
+  {
+    "path": "asset_archive/g00s006",
+    "size": 2219646155,
+    "sha256": "e5fcb2ae326df34a18f2518711c40d49616beb80789eb6b22077482c60062ade"
+  },
+  {
+    "path": "asset_archive/g00s007",
+    "size": 2201340426,
+    "sha256": "b4b86b5e364994e734d46259fdb2c4698fa80866e67fa7b3674e37fabcf8acce"
+  },
+  {
+    "path": "asset_archive/g00s008",
+    "size": 2332781964,
+    "sha256": "7af2d3f9b75fe3b0fe237a628df62aeee8dd10c9a8d1c967b9ba40e512c26f98"
+  },
+  {
+    "path": "asset_archive/g00s009",
+    "size": 999552012,
+    "sha256": "815fbb7cf7c25532e8443a56593035a106589d9475669a5add95e0e9da581ed7"
+  },
+  {
+    "path": "asset_archive/g00s010",
+    "size": 923430860,
+    "sha256": "7d73584562385482e0479af05b2dd8dbdef0abfc81061c1f29abab0b2e5de92b"
+  },
+  {
+    "path": "asset_archive/g00s011",
+    "size": 2210041711,
+    "sha256": "9ec8d72353947d0ebc822ce1d592ffc8354fe85de2fec08bc933cb3553a9943e"
+  },
+  {
+    "path": "asset_archive/g00s012",
+    "size": 2085502109,
+    "sha256": "6b9700d397cbd237f291a4950fc21e614170d83c5ea6ab24e7b031d65c45adfe"
+  },
+  {
+    "path": "asset_archive/g00s013",
+    "size": 2091816164,
+    "sha256": "f30477be9c0d3f1c7cab57695abeafcbc57cb4604e292bf8c660b0b0ae7b4999"
+  },
+  {
+    "path": "asset_archive/g00s014",
+    "size": 2047006090,
+    "sha256": "e77eef5d8ef3dac6f7d8f919ac95ee0960624f4fa1dab31e1d6d4b7088e6647b"
+  },
+  {
+    "path": "asset_archive/g00s015",
+    "size": 1271757384,
+    "sha256": "7a4cb3cce4797ac6a40ad2249f2a213d3e218d590555cd573c9bb69f233b4064"
+  },
+  {
+    "path": "asset_archive/g00s016",
+    "size": 1546433438,
+    "sha256": "7a018593309a5e8b3732a0bf031a3b89f693e09d9d86509fa7bf9fbd00ad2482"
+  },
+  {
+    "path": "asset_archive/g00s017",
+    "size": 2186576142,
+    "sha256": "b2f6e105bbaf69531ad0b48cea004be3e754ddb32a1b83488c14b11283f25260"
+  },
+  {
+    "path": "asset_archive/g00s018",
+    "size": 2360432380,
+    "sha256": "fb32aff1d67a7a7dd2d2777e8c79dbb753feca01d55f2254851ce435b5ca48f4"
+  },
+  {
+    "path": "asset_archive/g00s019",
+    "size": 2230865740,
+    "sha256": "ecd9baed402cf7fcf31faca834b5f37409a4aef7da3d16a8f52f97500384f5bb"
+  },
+  {
+    "path": "asset_archive/g00s020",
+    "size": 2207903941,
+    "sha256": "3425ad1d8ddba155a6eb48444b954954897c39a34b94f074b9cd8f87220ddb36"
+  },
+  {
+    "path": "asset_archive/g00s021",
+    "size": 2249743253,
+    "sha256": "74667eb3dbc589d12d0f3684849b8cc9ab9ec27187e00cddc261e8ab69296335"
+  },
+  {
+    "path": "asset_archive/g00s022",
+    "size": 2118770537,
+    "sha256": "e6245efd7b62c3b1635caf186da627cfe7b57b682b806abd35c07a887f831cca"
+  },
+  {
+    "path": "asset_archive/g00s023",
+    "size": 2105065667,
+    "sha256": "004769d5ffb9f361851fe7ac688b1be5831daf51299f3cd8aca2b0f2cc576022"
+  },
+  {
+    "path": "asset_archive/g00s024",
+    "size": 2111006374,
+    "sha256": "0982a884dfe3429030df2812097281b68b55e699222ee9ce34af139b4bda5424"
+  },
+  {
+    "path": "asset_archive/g00s025",
+    "size": 2111077173,
+    "sha256": "a4bb1ed5c7309c77a7826f23456706ab7eabc3136bef555219b33ba5c81d0214"
+  },
+  {
+    "path": "asset_archive/g00s026",
+    "size": 1957196260,
+    "sha256": "8a5851cf173b56d16e2dbf2a2df0ed2ce15231b9ea06451bcbaa48b085d9ed92"
+  },
+  {
+    "path": "asset_archive/g00s027",
+    "size": 2122754953,
+    "sha256": "2731468a67eda8c06168a3b12dbfba49251961d5741cd2827415a468093a4692"
+  },
+  {
+    "path": "asset_archive/g00s028",
+    "size": 1991287740,
+    "sha256": "628a7bd08ebb3e9fca8aca5ca554dbe3135c7a614fd8992d9e9d86cdd3f28b8b"
+  },
+  {
+    "path": "asset_archive/g00s029",
+    "size": 2036934624,
+    "sha256": "ce1951eb9f17bfffb086ea85ca94d1d8410cf54ce4c085d3a21625afe45cd068"
+  },
+  {
+    "path": "asset_archive/g00s030",
+    "size": 2194702264,
+    "sha256": "1d729fc9ff96dbf7beb1ecaa5378c41db132d7cb084c3a44f859423d5887f6e0"
+  },
+  {
+    "path": "asset_archive/g00s031",
+    "size": 2882640733,
+    "sha256": "a8b7f14371c36a2fadbf85f92dfe1299de6957d5fae1a7c4cc81fc7f874fc36f"
+  },
+  {
+    "path": "asset_archive/g00s032",
+    "size": 3177493693,
+    "sha256": "fadd87a1e8d13cf03d529b7af3df69284a5dd22fca459dbf534101c6d97c8c2e"
+  },
+  {
+    "path": "asset_archive/g00s033",
+    "size": 375476369,
+    "sha256": "9b8c8ceb3c385da0d721e92100119e1f40b92fbe653f0a6f3959502a42b3c33a"
+  },
+  {
+    "path": "asset_archive/toc",
+    "size": 10707618,
+    "sha256": "58e571cf1e54e08b18db4e8effb3f964eded1ddaa3e4feebd72f88fbbc066da1"
+  },
+  {
+    "path": "bink2w64.dll",
+    "size": 391360,
+    "sha256": "32d7512f0c872cd3c1b5ad5606fb772c97c26cea3e2d6cb720c2f4c2a928afd0"
+  },
+  {
+    "path": "crs-client.dll",
+    "size": 479400,
+    "sha256": "3436f313213dc9cbc22329401e0b1e427c135b22a9c55b1bd3725a31c0dbe464"
+  },
+  {
+    "path": "crs-handler.exe",
+    "size": 1247400,
+    "sha256": "5e522db78f20c7c97823588ea2b9814e2a94c90c327eba05d64e9dd733a0b2b2"
+  },
+  {
+    "path": "d3dcompiler_47.dll",
+    "size": 4173928,
+    "sha256": "e994847e01a6f1e4cbdc5a864616ac262f67ee4f14db194984661a8d927ab7f4"
+  },
+  {
+    "path": "gattaca.dll",
+    "size": 262144,
+    "sha256": "56086c1885acfd6d0ea99b732ec06e86cd8150709b916d9027711e49417dbc8f"
+  },
+  {
+    "path": "liblipsync_tltb64.dll",
+    "size": 1790976,
+    "sha256": "ecb3503ca5cbe407059af119ef03b47aa7c0d3163fad3a125be8b825db08f34d"
+  },
+  {
+    "path": "libxess.dll",
+    "size": 74108944,
+    "sha256": "d7f0e1f0e6bccdd52b331d2d126abf1bfc30fce18a3f0255b876086eed70d4ca"
+  },
+  {
+    "path": "nvngx_dlss.dll",
+    "size": 51275816,
+    "sha256": "87c68627c648f05b7b0450ffdae04c04aae3c6d4c5ad582abab7db319e339fe6"
+  },
+  {
+    "path": "nvngx_dlssg.dll",
+    "size": 11778088,
+    "sha256": "a362b115f717b739c098123b3e54713946f032f2c40dad41d6398d9a09acd59e"
+  },
+  {
+    "path": "sl.common.dll",
+    "size": 655832,
+    "sha256": "62640a2a45701a4d5dc8bf9f3db897aac1e239b5c197f9259f99c33fd10e46b0"
+  },
+  {
+    "path": "sl.dlss.dll",
+    "size": 241120,
+    "sha256": "ef488e45ede9bf4a3012ff951d2644d7476dd85c92cf340f23d43d243857272b"
+  },
+  {
+    "path": "sl.dlss_g.dll",
+    "size": 435680,
+    "sha256": "b00ba676a0eada4bd332a73c8b383fcf9f4af482eae164a3f6860db1c454de8b"
+  },
+  {
+    "path": "sl.interposer.dll",
+    "size": 532960,
+    "sha256": "aa20b751432b1ba19a06379117a4ada8a8ba37c882e06a6203dd52fc8246bb1f"
+  },
+  {
+    "path": "sl.pcl.dll",
+    "size": 167904,
+    "sha256": "35edbfe4a55f344363eaebd9d9c927305d548130ab4ec592a0f5ada498b16870"
+  },
+  {
+    "path": "sl.reflex.dll",
+    "size": 177120,
+    "sha256": "1e1cbb07e1cfa93ba1b7af3cbaaa4281a952e5c8803510f59bad89d2d4befea0"
+  }
+]
