@@ -8,9 +8,9 @@ An unofficial, experimental UWP launcher for Xbox Developer Mode. Transfer a sup
 
 [Getting started](docs/GETTING-STARTED.md) · [Downloads](https://github.com/BBCPrince/UWP-Spider-Launcher/releases) · [Build from source](release/REBUILD-FROM-SOURCE.md) · [Third-party notices](THIRD-PARTY-NOTICES.txt)
 
-> **Latest source: 0.6.0.48**
+> **Latest source: 0.6.0.52**
 >
-> This repository contains launcher and preparation source. Game files, native compatibility-runtime binaries/source, and the private combined installer are not included. The existing 0.6.0.18 download is an older experimental launcher release.
+> This repository contains launcher and preparation source. Game files, native compatibility-runtime binaries/source, and complete playable installers are not included in the source tree. Existing release downloads are separate and may have a different version; this source update does not publish a new installer.
 
 ## Bring your own files
 
@@ -18,7 +18,7 @@ An unofficial, experimental UWP launcher for Xbox Developer Mode. Transfer a sup
 | --- | --- |
 | **USB** | Connect a drive containing your supported game folder. A ZIP is optional. |
 | **Wi-Fi** | Open the Xbox receiver, pair from your PC browser, and send the folder. No ZIP required. |
-| **Steam** | Approve sign-in using the Steam mobile app and download verified files for the pinned supported build. |
+| **Steam** | Choose a voice language, sign in by QR or account name/password, and download verified files for the supported build. |
 
 **Import or download → Verify → Prepare game → Play**
 
@@ -28,7 +28,10 @@ An unofficial, experimental UWP launcher for Xbox Developer Mode. Transfer a sup
 - On-console generation of required asset variants from your own files.
 - Local reconstruction of 8,435 known pipeline recipes; shader bytecode and generated recipes are not bundled.
 - Resumable transfers and preparation with progress reporting.
-- Supported voice packs retained from USB and Wi-Fi imports; Steam downloads currently select English audio.
+- Supported voice packs retained from USB and Wi-Fi imports.
+- Settings language selection for 12 supported voice languages, with Steam downloads for missing packs.
+- Steam QR or account/password sign-in with Steam Guard; no saved passwords or login tokens.
+- Voice-only downloads for a prepared game, without downloading the whole game again.
 - Storage management and a confirmation screen before removing prepared game files.
 - Compact controller-friendly layout with display-safe margins and scaled QR cards.
 - Support for a separate runtime or an optional combined package built using matching external runtime inputs.
@@ -55,7 +58,7 @@ The default source build opens a separately installed runtime. A combined build 
 
 Xbox UWP games have a **5 GiB app-memory limit**. The matching runtime settings use reduced texture resolution and asset detail to fit within that budget. Performance, visual quality, and stability can vary; a full play-through and sustained 60 FPS are not guaranteed.
 
-The latest source includes newer-version import support and fixes for Xbox shader-preparation paths and the shared support-folder location. See [version notes](release/STATUS.md).
+The latest source adds Steam account/password sign-in, language selection and voice-pack downloads. It retains newer-version import support and preparation-path fixes. The new sign-in and language-download flows passed local checks; live Xbox testing is still pending. See [version notes](release/STATUS.md).
 
 No game assets, executable, generated shader programs, compiled caches, saves, credentials, signing keys, or private runtime DLLs are included here.
 

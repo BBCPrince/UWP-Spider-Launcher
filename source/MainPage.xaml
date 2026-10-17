@@ -19,7 +19,7 @@
    </StackPanel>
    <TextBlock x:Name="DeviceLabel" HorizontalAlignment="Right" VerticalAlignment="Center" Text="XBOX DEVELOPER MODE" Foreground="#A4B0C2" FontSize="11" CharacterSpacing="90"/>
   </Grid>
-  <Pivot Grid.Row="1" x:Name="MainTabs" Margin="0" Padding="0">
+  <Pivot Grid.Row="1" x:Name="MainTabs" Margin="0" Padding="0" SelectionChanged="SettingsTab_Changed">
    <PivotItem Header="Home" Margin="0,4,0,6">
     <Grid ColumnSpacing="18">
      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="220"/></Grid.ColumnDefinitions>
@@ -61,8 +61,9 @@
       <Grid>
        <Grid x:Name="SteamPanel" ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" IsTabStop="False">
-        <StackPanel Spacing="6"><TextBlock Text="Download from Steam" FontSize="21" FontWeight="SemiBold"/><TextBlock Text="Sign in with the Steam mobile app to download your owned game directly to Xbox." Style="{StaticResource Note}"/>
-         <Button x:Name="SteamButton" Content="Sign in and download" Click="Steam_Click" Background="#D52F49" Foreground="White" HorizontalAlignment="Left"/>
+        <StackPanel Spacing="6"><TextBlock Text="Download from Steam" FontSize="21" FontWeight="SemiBold"/><TextBlock Text="Sign in with a QR code or your Steam account name and password." Style="{StaticResource Note}"/>
+         <TextBlock Text="Voice language" Style="{StaticResource Note}"/><ComboBox x:Name="SteamLanguageList" Width="280" HorizontalAlignment="Left" FontSize="14" AutomationProperties.Name="Steam download voice language"/>
+         <StackPanel Spacing="6"><Button x:Name="SteamButton" Content="Sign in with QR code" Click="Steam_Click" Background="#D52F49" Foreground="White" HorizontalAlignment="Left"/><Button x:Name="SteamPasswordButton" Content="Use account name and password" Click="SteamPassword_Click" HorizontalAlignment="Left"/></StackPanel>
          <TextBlock x:Name="SteamInfo" Text="Supported version selected automatically. No password is stored." Foreground="#86D4DF" FontSize="12" MaxLines="3" TextTrimming="CharacterEllipsis"/>
         </StackPanel></ScrollViewer><Image Grid.Column="1" x:Name="SteamQr" Width="176" Height="176" Stretch="Uniform" VerticalAlignment="Center" Visibility="Collapsed"/>
        </Grid>
@@ -93,13 +94,19 @@
     </Grid>
    </PivotItem>
    <PivotItem Header="Settings" Margin="0,4,0,6">
-    <Border Style="{StaticResource Card}"><StackPanel Spacing="12"><TextBlock Text="Download connections" FontSize="23" FontWeight="SemiBold"/><TextBlock Text="More workers can improve speed when the connection and drive can keep up." Style="{StaticResource Note}"/>
+    <Border Style="{StaticResource Card}"><ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" IsTabStop="False"><StackPanel Spacing="12"><TextBlock Text="Game language" FontSize="23" FontWeight="SemiBold"/>
+     <TextBlock Text="Choose an installed voice pack or download another language from Steam." Style="{StaticResource Note}"/>
+     <ComboBox x:Name="GameLanguageList" SelectionChanged="GameLanguage_Changed" Width="380" HorizontalAlignment="Left" FontSize="14" PlaceholderText="Prepare the game to see languages" IsEnabled="False" AutomationProperties.Name="Installed game language"/>
+     <StackPanel Orientation="Horizontal" Spacing="8"><Button x:Name="ApplyLanguageButton" Content="Apply language" Click="ApplyLanguage_Click" IsEnabled="False"/><Button x:Name="DownloadLanguageButton" Content="Download from Steam" Click="DownloadLanguage_Click" IsEnabled="False"/><Button Content="Refresh" Click="RefreshLanguages_Click"/></StackPanel>
+     <TextBlock x:Name="GameLanguageStatus" Text="Missing voice packs can be downloaded from Steam. Restart the game after changing language." Style="{StaticResource Note}"/>
+     <Border Height="1" Background="#303746" Margin="0,4"/>
+     <TextBlock Text="Download connections" FontSize="23" FontWeight="SemiBold"/><TextBlock Text="More workers can improve speed when the connection and drive can keep up." Style="{StaticResource Note}"/>
      <ComboBox x:Name="DownloadWorkers" SelectedIndex="1" SelectionChanged="Workers_Changed" Width="260" HorizontalAlignment="Left" FontSize="14" AutomationProperties.Name="Download workers"><ComboBoxItem Content="2 workers — conservative"/><ComboBoxItem Content="4 workers — default"/><ComboBoxItem Content="8 workers — faster network"/></ComboBox>
      <TextBlock Text="Applies to the next download. Actual speed depends on Steam, your network and Xbox storage." Style="{StaticResource Note}"/>
      <TextBlock Text="Stopping a download keeps partial files. Sign in again to verify and resume them." Style="{StaticResource Note}"/>
      <TextBlock x:Name="RuntimePackageInfo" Text="A compatible game runtime must be installed separately. Close the game before checking it or restoring startup settings. Your existing settings and saves are preserved." Style="{StaticResource Note}"/>
      <Button Content="Check runtime / repair settings" Click="RepairRuntime_Click" HorizontalAlignment="Left"/>
-    </StackPanel></Border>
+    </StackPanel></ScrollViewer></Border>
    </PivotItem>
   </Pivot>
   <Border Grid.Row="2" BorderBrush="#303746" BorderThickness="0,1,0,0" Padding="0,10,0,0">

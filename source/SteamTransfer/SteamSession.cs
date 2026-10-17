@@ -98,21 +98,29 @@ namespace SpiderManInstaller.SteamTransfer
             auth.ChallengeURLChanged = () => show(auth.ChallengeURL);
             show(auth.ChallengeURL); trace.Record(TransferEvent.QrReady); return auth;
         }
-        public async Task Login(Action<string> showQr)
+        public async Task Login(Action<string> showQr,SteamLoginCredentials credentials=null,ISteamGuardPrompt prompt=null)
         {
-            await Connect().ConfigureAwait(false);
-            var auth = await CreateQr(showQr).ConfigureAwait(false);
+            QrAuthSession qrAuth=null;AuthSession auth=null;AuthSessionDetails details=null;
             try
             {
-                using (var approval = CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token))
+                await Connect().ConfigureAwait(false);
+                using(var approval=CancellationTokenSource.CreateLinkedTokenSource(lifetime.Token))
                 {
                     approval.CancelAfter(TimeSpan.FromMinutes(4));
-                    var result = await auth.PollingWaitForResultAsync(approval.Token).ConfigureAwait(false);
+                    if(credentials==null){qrAuth=await CreateQr(showQr).ConfigureAwait(false);auth=qrAuth;}
+                    else
+                    {
+                        if(prompt==null)throw new TransferProblem("Steam Guard verification is unavailable. Try QR sign-in.");
+                        details=new AuthSessionDetails{Username=credentials.Username,Password=credentials.TakePassword(),
+                            DeviceFriendlyName="UWP Spider Launcher",IsPersistentSession=false,Authenticator=new SteamGuardAuthenticator(prompt,approval.Token)};
+                        try{auth=await Wait(client.Authentication.BeginAuthSessionViaCredentialsAsync(details)).ConfigureAwait(false);}
+                        finally{details.Password=null;details.Username=null;credentials.Dispose();}
+                    }
+                    var result=await auth.PollingWaitForResultAsync(approval.Token).ConfigureAwait(false);
                     showQr(null);
-                    user.LogOn(new SteamUser.LogOnDetails { Username = result.AccountName,
-                        AccessToken = result.RefreshToken, ShouldRememberPassword = false,
-                        LoginID = BitConverter.ToUInt32(Guid.NewGuid().ToByteArray(), 0), MachineName = "UWP Spider Launcher" });
-                    result = null; // Session-only credentials; never persisted or logged.
+                    user.LogOn(new SteamUser.LogOnDetails{Username=result.AccountName,AccessToken=result.RefreshToken,
+                        ShouldRememberPassword=false,LoginID=BitConverter.ToUInt32(Guid.NewGuid().ToByteArray(),0),MachineName="UWP Spider Launcher"});
+                    result=null; // Session only; no saved password, guard data, or tokens.
                 }
                 var outcome = await Wait(loggedOn.Task).ConfigureAwait(false);
                 trace.Record(TransferEvent.LogonResult, (int)outcome);
@@ -129,7 +137,15 @@ namespace SpiderManInstaller.SteamTransfer
                 if (servers.Length == 0) throw new TransferProblem("Steam returned no compatible secure download servers.");
                 trace.Record(TransferEvent.Servers, servers.Length); cdn = new SteamKit2.CDN.Client(client);
             }
-            finally { auth.ChallengeURLChanged = null; showQr(null); }
+            catch(AuthenticationException ex)
+            {throw new TransferProblem("Steam sign-in was not accepted ("+ex.Result+"). Check your account details or Steam Guard and try again.");}
+            finally
+            {
+                if(details!=null){details.Password=null;details.Username=null;}
+                credentials?.Dispose();
+                if(qrAuth!=null)qrAuth.ChallengeURLChanged=null;
+                showQr(null);
+            }
         }
         async Task<T> Retry<T>(Func<Server, Task<T>> fetch, CancellationToken token)
         {
@@ -154,17 +170,29 @@ namespace SpiderManInstaller.SteamTransfer
                 }
             }
         }
-        public async Task<List<TransferFile>> ReadPlan(List<ExpectedFile> expected, CancellationToken token)
+        async Task<KeyValue> ReadLanguageProduct()
+        {
+            var apps=client.GetHandler<SteamApps>();
+            var tokens=await apps.PICSGetAccessTokens((uint?)AppId,null);
+            ulong access=0;tokens.AppTokens.TryGetValue(AppId,out access);
+            var info=await apps.PICSGetProductInfo(new SteamApps.PICSRequest(AppId,access),null);
+            if(info.Failed || !info.Complete)throw new TransferProblem("Steam language metadata was incomplete. Retry the download.");
+            foreach(var batch in info.Results)
+                if(batch.Apps.TryGetValue(AppId,out var product)&&!product.MissingToken)return product.KeyValues;
+            throw new TransferProblem("Steam did not grant access to game language metadata.");
+        }
+        public async Task<List<TransferFile>> ReadPlan(List<ExpectedFile> expected, CancellationToken token, string language="english", bool languageOnly=false)
         {
             var wanted = expected.ToDictionary(f => ImportEngine.SafePath(f.Path), StringComparer.OrdinalIgnoreCase);
             if (wanted.Keys.Any(p => p.StartsWith(".steamkit-transfer", StringComparison.OrdinalIgnoreCase) ||
                 p.Equals("import-receipt.txt", StringComparison.OrdinalIgnoreCase))) throw new InvalidDataException("Reserved download metadata path.");
             var planned = new Dictionary<string, TransferFile>(StringComparer.OrdinalIgnoreCase);
-            uint[] depots = { 1817071, 1817072, 1817074 };
-            ulong[] manifests = { 7101193785692308687, 670672075597558132, 2767115330843299188 };
-            for (int i = 0; i < depots.Length; i++)
+            var depots=SteamLanguages.Depots(language,languageOnly);
+            KeyValue product=depots.Any(d=>d.Manifest==0)?await Wait(ReadLanguageProduct()).ConfigureAwait(false):null;
+            foreach(var selected in depots)
             {
-                uint depot = depots[i]; ulong manifestId = manifests[i];
+                uint depot=selected.Id;
+                ulong manifestId=selected.Manifest!=0?selected.Manifest:SteamLanguages.PublicManifest(product,depot,language);
                 var keyResult = await Wait(GetKey(depot)).ConfigureAwait(false);
                 trace.Record(TransferEvent.DepotKeyResult, ((long)depot << 32) | (uint)keyResult.Result);
                 if (keyResult.Result != EResult.OK || keyResult.DepotKey == null)

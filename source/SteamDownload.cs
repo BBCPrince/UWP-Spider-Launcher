@@ -14,7 +14,9 @@ namespace SpiderManInstaller
         static readonly SemaphoreSlim Gate = new SemaphoreSlim(1);
         internal static async Task RunAsync(string localFolder, List<ExpectedFile> expected, long freeBytes,
             Action<string> status, Action<string> qr, CancellationToken token,
-            Action<DownloadProgressSnapshot> progress = null, int workers = 4)
+            Action<DownloadProgressSnapshot> progress = null, int workers = 4,
+            SteamLoginCredentials credentials = null, ISteamGuardPrompt guardPrompt = null,
+            string language = "english", bool languageOnly = false)
         {
             if (!await Gate.WaitAsync(0)) throw new InvalidOperationException("A Steam download is already running.");
             SteamSession session = null;
@@ -23,23 +25,24 @@ namespace SpiderManInstaller
             try
             {
                 token.ThrowIfCancellationRequested();
-                string folder = Path.Combine(localFolder, "SteamDownload");
+                SteamLanguages.Depots(language,languageOnly); // Reject unknown IDs before using a path or connecting.
+                string folder = languageOnly ? Path.Combine(localFolder,"SteamLanguages",language) : Path.Combine(localFolder, "SteamDownload");
                 Directory.CreateDirectory(folder);
                 trace = new TransferTrace(Path.Combine(localFolder, "steam-transfer.log"));
                 if (expected == null || expected.Count == 0) throw new InvalidDataException("Supported game-file list is missing.");
                 long required = TransferCore.RequiredFreeSpace(folder, expected);
                 if (freeBytes < required) throw new TransferProblem("Need " + (required / 1073741824.0).ToString("F1") + " GiB free for download and safe replacement.");
                 string receipt = TransferCore.FullPath(folder, "import-receipt.txt");
-                if (File.Exists(receipt)) File.Delete(receipt);
+                if (!languageOnly && File.Exists(receipt)) File.Delete(receipt);
                 var tracker = new DownloadProgressTracker(progress ?? (p => { }));
                 tracker.Begin(expected.Sum(f => f.Size));
                 pulse = new Timer(_ => tracker.Pulse(), null, 1000, 1000);
                 session = new SteamSession(new SteamMachineIdentity(), trace, token);
-                status("Approve the QR sign-in in your Steam app. Your account must own Spider-Man Remastered.");
-                await session.Login(qr).ConfigureAwait(false);
+                status(credentials==null?"Approve the QR sign-in in your Steam app.":"Signing in to Steam. Complete Steam Guard if requested.");
+                await session.Login(qr,credentials,guardPrompt).ConfigureAwait(false);
                 tracker.Stage("Checking supported Steam version");
                 status("Checking access to supported build 14752622...");
-                var plan = await session.ReadPlan(expected, token).ConfigureAwait(false);
+                var plan = await session.ReadPlan(expected, token,language,languageOnly).ConfigureAwait(false);
                 int completed = 0;
                 foreach (var file in plan)
                 {
@@ -48,10 +51,13 @@ namespace SpiderManInstaller
                     trace.Record(TransferEvent.VerifiedFile, ++completed);
                 }
                 token.ThrowIfCancellationRequested();
-                File.WriteAllText(receipt, "Verified original Steam files\r\nUTC " + DateTime.UtcNow.ToString("o") +
-                    "\r\nFiles " + expected.Count + "\r\nReady for preparation.\r\n");
+                if (!languageOnly) {
+                    File.WriteAllText(receipt, "Verified original Steam files\r\nUTC " + DateTime.UtcNow.ToString("o") +
+                        "\r\nFiles " + expected.Count + "\r\nReady for preparation.\r\n");
+                    File.WriteAllText(TransferCore.FullPath(folder,SteamLanguages.PreferenceFile),language);
+                }
                 tracker.Stage("Complete"); trace.Record(TransferEvent.Completed, completed);
-                status("Steam files verified. Choose Prepare game to enable Play.");
+                status(languageOnly?"Voice pack downloaded and verified.":"Steam files verified. Choose Prepare game to enable Play.");
             }
             catch (OperationCanceledException) when (token.IsCancellationRequested)
             { trace?.Record(TransferEvent.Cancelled); throw; }
@@ -63,6 +69,7 @@ namespace SpiderManInstaller
             }
             finally
             {
+                credentials?.Dispose();
                 pulse?.Dispose();
                 try { if (session != null) await session.Close().ConfigureAwait(false); }
                 finally { qr(null); Gate.Release(); }

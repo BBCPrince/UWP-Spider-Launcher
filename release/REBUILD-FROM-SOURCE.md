@@ -1,4 +1,4 @@
-> Current source: 0.6.0.48. See [version notes](STATUS.md) for compatibility and limitations.
+> Current source: 0.6.0.52. See [version notes](STATUS.md) for compatibility and limitations.
 
 # Source and rebuild materials
 

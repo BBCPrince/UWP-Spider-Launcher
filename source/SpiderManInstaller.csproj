@@ -28,7 +28,7 @@
   <Content Include="..\licenses\*.txt"><Link>Licenses\%(Filename)%(Extension)</Link></Content>
   <Content Include="..\THIRD-PARTY-NOTICES.txt"><Link>THIRD-PARTY-NOTICES.txt</Link></Content>
   <Compile Include="RuntimeGraphicsRepair.cs" /><Compile Include="RuntimeInstallation.cs" /><Compile Include="RuntimeRepairState.cs" />
-  <Compile Include="App.xaml.cs"><DependentUpon>App.xaml</DependentUpon></Compile><Compile Include="MainPage.xaml.cs"><DependentUpon>MainPage.xaml</DependentUpon></Compile>
+  <Compile Include="App.xaml.cs"><DependentUpon>App.xaml</DependentUpon></Compile><Compile Include="SteamSignInUi.cs" /><Compile Include="GameLanguageSettings.cs" /><Compile Include="GameLanguageUi.cs" /><Compile Include="SteamLanguages.cs" /><Compile Include="SteamLanguageUi.cs" /><Compile Include="MainPage.xaml.cs"><DependentUpon>MainPage.xaml</DependentUpon></Compile>
   <Compile Include="LanguageImports.cs" /><Content Include="LanguagePacks.json" /><Compile Include="ImportEngine.cs" /><Compile Include="FolderImportEngine.cs" /><Compile Include="UsbFolderSource.cs" /><Compile Include="GameStorage.cs" /><Compile Include="FolderChecks.cs" /><Compile Include="SteamMachineIdentity.cs" /><Compile Include="SteamDownload.cs" /><Compile Include="SteamTransfer\*.cs" /><Compile Include="WifiReceiver.cs" /><Compile Include="WifiFolderTransfer.cs" /><Compile Include="WifiProtocol.cs" /><Content Include="WifiTransfer.html" /><Compile Include="Properties\AssemblyInfo.cs" />
   <AppxManifest Include="Package.appxmanifest" Condition="'$(CombinedRuntimeBuild)' != 'true'"><SubType>Designer</SubType></AppxManifest>
   <AppxManifest Include="Package.combined.appxmanifest" Condition="'$(CombinedRuntimeBuild)' == 'true'"><SubType>Designer</SubType></AppxManifest>

@@ -36,11 +36,13 @@ namespace SpiderManInstaller
         public MainPage()
         {
             InitializeComponent();
+            InitializeSteamLanguages();
             SizeChanged+=(s,e)=>UpdateResponsiveLayout();
             InstallCard.SizeChanged+=(s,e)=>UpdateResponsiveLayout();
             if(CombinedRuntime.Enabled)RuntimePackageInfo.Text="The runtime is included in this package. Close the game before checking it or restoring startup settings. Your existing settings and saves are preserved.";
             repairTimer.Tick+=(s,e)=>ShowRuntimeSetupResult();
             Unloaded+=(s,e)=>repairTimer.Stop();
+            Window.Current.VisibilityChanged+=(s,e)=>{if(!e.Visible)steamAuthDialog?.Hide();};
             object savedWorkers;
             if(ApplicationData.Current.LocalSettings.Values.TryGetValue("download-workers",out savedWorkers))
                 DownloadWorkers.SelectedIndex=Convert.ToInt32(savedWorkers)==2?0:Convert.ToInt32(savedWorkers)==8?2:1;
@@ -50,7 +52,7 @@ namespace SpiderManInstaller
                 UpdateResponsiveLayout();
                 RefreshStorage();
                 RefreshPreparation();
-                if(CombinedRuntime.Enabled)CombinedRuntime.Log("latest_launcher_ui_loaded version=0.6.0.42 play_enabled="+PlayButton.IsEnabled);
+                if(CombinedRuntime.Enabled)CombinedRuntime.Log("latest_launcher_ui_loaded version=0.6.0.52 play_enabled="+PlayButton.IsEnabled);
                 ShowRuntimeSetupResult();
                 (PlayButton.IsEnabled?PlayButton:SteamTile).Focus(FocusState.Programmatic);
 
@@ -281,7 +283,8 @@ namespace SpiderManInstaller
             return expected;
         }
         async void Steam_Click(object sender, RoutedEventArgs e){await DownloadFromSteam();}
-        async Task DownloadFromSteam()
+        async void SteamPassword_Click(object sender,RoutedEventArgs e){await DownloadFromSteam(true);}
+        async Task DownloadFromSteam(bool usePassword=false,LanguagePack languageOnly=null)
         {
             if (busy || (receiver != null && receiver.Uploading)) return;
             StopWifi();
@@ -292,30 +295,46 @@ namespace SpiderManInstaller
             TransferSize.Text=TransferStats.Text=TransferPercent.Text="";
             Progress.Value=0;Progress.IsIndeterminate=true;
             cancellation = new CancellationTokenSource();
-            SteamButton.IsEnabled = false;
+            SteamButton.IsEnabled = SteamPasswordButton.IsEnabled = false;
+            SteamLanguageList.IsEnabled=false;DownloadLanguageButton.IsEnabled=false;
             PlayButton.IsEnabled=PrepareButton.IsEnabled=false;
             int workers=SelectedWorkers();
             string outcome="Steam files downloaded and verified. Choose Prepare game to enable Play.";
             string local = null;
+            SteamLoginCredentials login=null;
             try
             {
                 local = GameStorage.OpenRoot();
-                var expected = await LoadExpected();
+                var selected=languageOnly??SelectedSteamLanguage();
+                var catalogue=GamePreparation.LoadLanguagePacks();
+                var expected = languageOnly!=null?new List<ExpectedFile>{selected.File}:SteamLanguages.SelectFiles(await LoadExpected(),catalogue,selected.Language);
+                if(languageOnly!=null&&!GamePreparation.Ready())throw new IOException("Prepare the game before adding a voice pack.");
                 var free = GameStorage.FreeBytes(local);
                 var token = cancellation.Token;
+                if(usePassword)login=await AskSteamCredentials(token);
                 await Task.Run(() => SteamDownload.RunAsync(local, expected, free,
                     text=>SteamStatus(text,generation), ShowSteamQr, token,
-                    snapshot=>SteamProgress(snapshot,generation),workers));
+                    snapshot=>SteamProgress(snapshot,generation),workers,login,usePassword?new SteamGuardUi(this):null,selected.Language,languageOnly!=null));
+                if(languageOnly!=null) {
+                    await Task.Run(()=>{
+                        var folder=Path.Combine(local,"SteamLanguages",selected.Language);
+                        SteamLanguages.InstallVoice(folder,LanguageGameRoot,selected,token);
+                        GameLanguageSettings.Apply(LanguageGameRoot,selected.Language,LanguageCatalogue());
+                    });
+                    outcome=selected.Label+" voice pack installed and selected. Restart the game to apply.";
+                } else outcome=selected.Label+" audio and game files verified. Choose Prepare game to enable Play.";
                 Progress.Value=100;TransferPercent.Text="100%";
             }
             catch (OperationCanceledException) { outcome="Download stopped. Sign in again to verify and resume partial files."; }
             catch (Exception ex) { outcome="Steam download stopped: " + ex.Message; }
             finally
             {
+                login?.Dispose();
                 downloadActive=false;++downloadGeneration;CancelButton.Visibility=Visibility.Collapsed;
                 ShowSteamQr(null);
                 cancellation.Dispose(); cancellation = null;
-                busy = false; SteamButton.IsEnabled = true;
+                busy = false; SteamButton.IsEnabled = SteamPasswordButton.IsEnabled = true;
+                SteamLanguageList.IsEnabled=true;RefreshGameLanguages();
                 Progress.IsIndeterminate=false;TransferStats.Text="";
                 RefreshPreparation();RefreshStorage();
                 SteamInfo.Text=Status.Text=outcome;

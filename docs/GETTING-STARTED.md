@@ -4,7 +4,7 @@ UWP Spider Launcher imports and prepares your own supported game files. It does 
 
 ## Availability
 
-The current launcher source is 0.6.0.48. No public installer or runtime bundle is provided. The instructions below describe the current private test workflow once both applications and matching runtime support are installed.
+The current launcher source is 0.6.0.52. This source update does not publish a new installer or runtime bundle. Existing release downloads may differ from the current source. The instructions below describe the workflow once matching launcher and runtime components are installed.
 
 ## Choose an import method
 
@@ -29,14 +29,25 @@ Keep the launcher open until the transfer finishes. The local receiver is not in
 
 ### Steam
 
-1. Open **Install → Steam → Sign in and download**.
-2. Scan the QR code with the Steam mobile app and approve sign-in.
-3. The launcher checks access to the pinned supported depots and downloads verified files.
-4. If interrupted, sign in again to verify existing chunks and resume.
+1. Open **Install → Steam** and choose a **Voice language**.
+2. Choose **Sign in with QR code** or **Use account name and password**. Enter credentials only on your own Xbox and complete Steam Guard if prompted.
+3. The launcher checks Steam access and downloads the supported core game files plus the chosen voice pack.
+4. Choose **Prepare game** when verification finishes. The selected language is applied after preparation.
+5. If interrupted, select the same language and sign in again to verify existing chunks and resume.
 
-The downloader uses SteamKit directly. It requires account access to the game and supported depots. No Steam password is entered in the launcher; session credentials are not saved by the downloader. This is not a claim of an independent security audit.
+The downloader uses SteamKit directly and requires ownership and depot access. Passwords, Steam Guard codes, and login tokens are not saved by the downloader. This is not a claim of an independent security audit. Do not share credentials, codes or sign-in screenshots.
 
-The Steam route currently selects English audio. USB and Wi-Fi imports copy all included supported voice packs.
+Core files and English audio use the pinned original-build manifests. Other voice-pack manifests are obtained from Steam; accepted archives must still match the packaged size and complete SHA-256. Incompatible or damaged audio is rejected, rather than replacing installed files.
+
+### Change or add a language
+
+Open **Settings → Game language**, choose an installed voice pack, and select **Apply language**. Restart the game afterward. **Default / restore previous language** restores the configuration that existed before the launcher changed it.
+
+A missing voice pack is labeled **download from Steam**. Choose it and select **Download from Steam**, then sign in by QR or account/password. For a prepared game, only the selected voice pack is downloaded and verified; existing game files and saves are retained. It is selected when installation finishes. Restart the game to use it.
+
+Supported audio: English, French, German, Italian, Japanese, Polish, Portuguese (Portugal), Portuguese (Brazil), Russian, Spanish (Spain), Spanish (Latin America), and Arabic. USB and Wi-Fi imports retain all supported voice packs already included in the source folder. In-game text-language settings can override the runtime default.
+
+The new username/password and Steam language-download flows have passed local checks. Authenticated language downloads and Xbox UI/audio playback still need live testing.
 
 ## Prepare and play
 
@@ -73,3 +84,7 @@ For an issue report, include launcher version, import method, supported game bui
 ### Fresh preparation support-path errors
 
 Version 0.6.0.48 corrects the newer-profile support-payload location. If 0.6.0.47 stops during Prepare with a missing installed-package path, update the launcher, select the already verified import, and choose Prepare again. Complete generated files are verified and reused; a verified transfer does not need to be repeated for this path fix.
+
+### Xbox App / Game classification
+
+The package declares `expandedResources` to request Game-mode resources for both entries. This capability is deprecated, and automatic allocation on a console configured to treat packages as App is not yet verified. If the game cannot launch with the App classification, set the package to **Game** in Dev Home. Device Portal also has **Settings → Preferences → Treat UWP apps as games by default**.
