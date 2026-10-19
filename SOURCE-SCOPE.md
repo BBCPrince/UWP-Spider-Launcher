@@ -4,6 +4,7 @@ Included:
 
 - C#/XAML launcher, controller UI, import validation, USB/ZIP/Wi-Fi transfer, and direct SteamKit download integration.
 - Preparation orchestration, storage management, converter source, and numeric reconstruction metadata.
+- An authored, version-checked map-UI transformation for the fast-travel tutorial. It derives the corrected asset locally from owned files; it does not contain the original UI, a decompiled class, or generated game assets.
 - Build scripts, dependency pins, upstream license texts, attribution, and user documentation.
 - Exact supported-version identities and shader-location maps. These contain hashes, ranges, and graphics-state metadata, not shader programs.
 

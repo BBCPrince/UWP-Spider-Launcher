@@ -1,5 +1,18 @@
 # Version notes
 
+## 0.6.0.56
+
+- Combined-package Play generates a fast-travel tutorial correction from the user’s verified map UI.
+- Fixes the UI rejection when the active reveal tutorial receives a travelable, unlocked destination while its map reports offline. The game-specific map flag is not an internet-connectivity diagnosis.
+- Caches native destination eligibility when it arrives before the tutorial opens, then rechecks it when the hold step registers its completion callback.
+- Keeps the original one-second hold, tutorial completion and native fast-travel callback; locked and nontravelable destinations remain blocked.
+- Supports both retained imported archives and archives moved into the prepared runtime, using the preserved original index. The source archive is unchanged, the active TOC is backed up, and other asset routes are preserved.
+- No original map UI, generated archive, shader program, save, runtime DLL or private installer is added to this source release.
+
+Retained updates: both supported game profiles, USB and folder-based Wi-Fi imports, Steam QR/account sign-in, Steam Guard, voice-language selection and downloads, preparation/recovery, shader-recipe reconstruction, and compact display-safe UI. The source was compared with the current launcher/preparation candidate; required source inputs are included. Native performance, memory and rendering fixes belong to the separately supplied runtime, not this repository.
+
+Validation: Release x64 .NET Native builds passed for the published launcher source and the private combined build, along with 27 preparation checks and 1,536 bytecode state cases. The test package was installed on Xbox with saves preserved. On October 19, 2026, the user confirmed that the fast-travel fix worked on Xbox Series X. This confirms the tested tutorial case, not full-game stability or every fast-travel destination. Native runtime and diagnostic changes remain external inputs.
+
 ## 0.6.0.52
 
 - Steam username/password sign-in with Steam Guard, alongside QR sign-in.

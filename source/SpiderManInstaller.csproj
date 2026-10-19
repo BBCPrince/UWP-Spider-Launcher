@@ -16,7 +16,7 @@
  <ItemGroup><PackageReference Include="K4os.Compression.LZ4" Version="1.3.8" /><PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" /><PackageReference Include="SteamKit2" Version="2.5.0" Condition="'$(SteamKitAssembly)' == ''" /><PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" /><PackageReference Include="protobuf-net" Version="3.2.26" /><PackageReference Include="QRCoder" Version="1.4.3" /></ItemGroup>
  <ItemGroup>
   <Reference Include="SteamKit2" Condition="'$(SteamKitAssembly)' != ''"><HintPath>$(SteamKitAssembly)</HintPath><Private>true</Private></Reference>
-  <Compile Include="..\asset-preparation\AssetGenerator.cs" /><Compile Include="..\asset-preparation\AssetBatch.cs" /><Compile Include="..\asset-preparation\AssetIndex.cs" /><Compile Include="..\asset-preparation\ModelLod.cs" /><Compile Include="..\asset-preparation\ResampledTexture.cs" />
+  <Compile Include="..\asset-preparation\AssetGenerator.cs" /><Compile Include="..\asset-preparation\AssetBatch.cs" /><Compile Include="..\asset-preparation\AssetIndex.cs" /><Compile Include="..\asset-preparation\MapTravelPreparation.cs" /><Compile Include="..\asset-preparation\ModelLod.cs" /><Compile Include="..\asset-preparation\ResampledTexture.cs" />
   <Compile Include="..\asset-preparation\OwnedCompressionPreparation.cs" /><Content Include="..\asset-preparation\bin\uwp\OwnedShaderConvert.dll"><Link>OwnedShaderConvert.dll</Link></Content>
   <Compile Include="..\asset-preparation\PipelineGenerator.cs" /><Compile Include="..\asset-preparation\ComputeGenerator.cs" />
   <Content Include="..\asset-preparation\pipelines\compute-map-40630.tsv"><Link>PipelinePreparation\compute-map-40630.tsv</Link></Content>

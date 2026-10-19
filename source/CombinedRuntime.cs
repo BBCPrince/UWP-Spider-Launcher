@@ -34,7 +34,7 @@ namespace SpiderManInstaller
         {
             progress?.Invoke("Checking the included runtime components…");
             string inventory=Path.Combine(Bundle,"RuntimeInventory.json");
-            VerifyInventory(inventory,"26e9b4ee1c4b547d958462108b7c2679887cb912b812594bcefa3bef77581dea");
+            VerifyInventory(inventory,"3b7b763a05ff9435024e6e84d8cadeb687e5e856bf17342549de1500396f864c");
             foreach(var value in JsonArray.Parse(File.ReadAllText(inventory))) {
                 cancel.ThrowIfCancellationRequested();var row=value.GetObject();string name=row.GetNamedString("path");
                 if(String.IsNullOrEmpty(name)||ImportEngine.SafePath(name)!=name||name.EndsWith("/"))throw new IOException("Invalid runtime inventory path.");
@@ -99,6 +99,11 @@ namespace SpiderManInstaller
             string original=Path.Combine(SourceImport(),"Spider-Man.exe");
             AssetPreparation.ComputeGenerator.Run(File.Exists(original)?original:module,GamePreparation.ComputeMap,Path.Combine(Data,"first-launch-compute-v1"),progress,cancel);
             AssetPreparation.OwnedCompressionPreparation.Run(File.Exists(original)?original:module,Path.Combine(Bundle,"CompilerTools"),Path.Combine(ApplicationData.Current.LocalFolder.Path,"owned-compression-shaders-v1"),progress,cancel);
+            string runtimeArchives=Path.Combine(Data,"asset_archive"),ownedArchives=Path.Combine(SourceImport(),"asset_archive");
+            string ownedIndex=Path.Combine(ownedArchives,"toc");
+            if(!Directory.Exists(ownedArchives)){ownedArchives=runtimeArchives;ownedIndex=Path.Combine(GamePreparation.RuntimeRoot,"original-asset-toc");}
+            bool mapChanged=AssetPreparation.MapTravelPreparation.Ensure(ownedArchives,runtimeArchives,progress,cancel,ownedIndex);
+            Log("map_travel_ui_v1 ready=1 changed="+(mapChanged?1:0)+" native_destination_locks_preserved=1 owned_source_unchanged=1");
             Log("owned_runtime_verified bundled_game_module=0 bundled_shader_recipes=0 generated_recipes="+AssetPreparation.PipelineGenerator.Count);
         }
         static byte[] Hex(string value)

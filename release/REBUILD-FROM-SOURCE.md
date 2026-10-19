@@ -1,4 +1,4 @@
-> Current source: 0.6.0.52. See [version notes](STATUS.md) for compatibility and limitations.
+> Current source: 0.6.0.56. See [version notes](STATUS.md) for compatibility and limitations.
 
 # Source and rebuild materials
 
@@ -50,6 +50,8 @@ The source includes combined-package launch and preparation orchestration. It do
 The payload must contain the pinned `RuntimeInventory.json`, `StartupContent/` runtime components, `Defaults/`, and `InitialSettings/`. Preparation support must contain the matching `PreparationRecipe.json`, `ModulePatch.json`, and a shared `PreparationPayload/` directory. For the newer profile, `Version40630/` contains its metadata; shared support files stay at the base payload root, not a duplicate version-local payload directory. Do not place these directories in the source repository. The normal build excludes them, and a combined build with missing inputs fails explicitly. Game executables, derived game modules, generated shader recipes, and compiled caches are not valid bundled inputs.
 
 The matching native host must select the correct per-version adapters. The newer 4.0630 profile also requires an explicit load of its verified owned crash-report client before loading the game module. The launcher reconstructs the supported crash-reporting import from the owned SDK and verifies its result; the SDK itself is not distributed here. This source does not reproduce or license the private native host. The public binary-release guard also applies to combined builds.
+
+The combined launcher applies the map correction when **Play** verifies the owned runtime. Installing the package or launching the native game entry directly does not run that preparation step. `MapTravelPreparation.cs` is required source, not an optional test tool. It accepts the exact supported owned map asset, generates only the corrected UI archive, and retains a backup of the previous prepared index. Existing native compatibility inputs and game files are still required.
 
 ## Dependency inputs
 
