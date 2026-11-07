@@ -104,6 +104,8 @@ namespace SpiderManInstaller
             if(!Directory.Exists(ownedArchives)){ownedArchives=runtimeArchives;ownedIndex=Path.Combine(GamePreparation.RuntimeRoot,"original-asset-toc");}
             bool mapChanged=AssetPreparation.MapTravelPreparation.Ensure(ownedArchives,runtimeArchives,progress,cancel,ownedIndex);
             Log("map_travel_ui_v1 ready=1 changed="+(mapChanged?1:0)+" native_destination_locks_preserved=1 owned_source_unchanged=1");
+            if (AssetPreparation.AssetIndex.RestoreIronArms(runtimeArchives, cancel))
+                Log("iron_arms_original_model_restored");
             Log("owned_runtime_verified bundled_game_module=0 bundled_shader_recipes=0 generated_recipes="+AssetPreparation.PipelineGenerator.Count);
         }
         static byte[] Hex(string value)
