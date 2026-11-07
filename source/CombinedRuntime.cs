@@ -91,7 +91,15 @@ namespace SpiderManInstaller
                 Directory.CreateDirectory(Data);
                 PreparationEngine.Derive(Path.Combine(SourceImport(),"Spider-Man.exe"),module,patch,cancel);
             }
-            cancel.ThrowIfCancellationRequested();Verify(module,(long)p.GetNamedNumber("result_size"),p.GetNamedString("result_sha256"));
+            cancel.ThrowIfCancellationRequested();
+            long moduleSize = (long)p.GetNamedNumber("result_size");
+            string moduleHash = p.GetNamedString("result_sha256");
+            if (MapOfflineRepair.Supports(moduleSize, moduleHash))
+            {
+                bool repaired = MapOfflineRepair.Ensure(module, cancel);
+                Log("map_offline_native_checks_restored changed=" + (repaired ? 1 : 0));
+            }
+            else Verify(module, moduleSize, moduleHash);
             CrashReporterPreparation.Ensure(Path.Combine(Data,"crs-client.dll"),progress,cancel);
             if(!AssetPreparation.PipelineGenerator.IsReady(Pipelines)&&!AssetPreparation.PipelineGenerator.VerifyExisting(Pipelines,progress,cancel))
                 GamePreparation.GeneratePipelines(SourceImport(),progress,cancel);
